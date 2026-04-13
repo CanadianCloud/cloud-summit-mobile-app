@@ -1,50 +1,22 @@
-# Welcome to your Expo app 👋
+# Cloud Summit Mobile App
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A mobile app for Cloud Summit 2026
 
-## Get started
+## Pre-requisites
 
-1. Install dependencies
+- NodeJS
+- An Android phone or iPhone
+- [Expo Go](https://expo.dev/go)
 
-   ```bash
-   npm install
-   ```
+## Getting Started
 
-2. Start the app
+1. Clone the repo
+2. Install dependencies (`npm install`)
+3. Run the project (`npm run start`)
+4. Scan the provided QR code using Expo Go
 
-   ```bash
-   npx expo start
-   ```
+## Resources
 
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
-```
-
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
-
-## Learn more
-
-To learn more about developing your project with Expo, look at the following resources:
-
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
-
-## Join the community
-
-Join our community of developers creating universal apps.
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [React Native Documenation](https://reactnative.dev/docs/getting-started): If you have used React before, this will almost be the same with some minor differences in what components to use and how CSS works
+- [Expo Router](https://docs.expo.dev/router/basics/core-concepts/): Expo is a full-stack React Native framework that provides a lot of APIS and services to make working with React Native smoother. Expo Router is part of a pre-configured file-based router that makes it easy for developers to manage navigation in mobile apps. It is built on top of [React Navigation](https://reactnavigation.org/) so all concepts from React Navigation will work on Expo Router
+  - [JavaScript tabs](https://docs.expo.dev/router/advanced/tabs/): A navigation layout supported by Expo Router
