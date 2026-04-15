@@ -7,11 +7,21 @@ export default function RootLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Schedule",
+          title: "Home",
           tabBarIcon: ({ color }) => (
             <MaterialIcons size={28} name="home" color={color} />
           ),
           headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="schedule"
+        options={{
+          title: "Schedule",
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons size={28} name="calendar-today" color={color} />
+          ),
+          headerShown: true,
         }}
       />
       <Tabs.Screen
@@ -21,7 +31,7 @@ export default function RootLayout() {
           tabBarIcon: ({ color }) => (
             <MaterialIcons size={28} name="map" color={color} />
           ),
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Tabs.Screen
@@ -29,9 +39,9 @@ export default function RootLayout() {
         options={{
           title: "Saved",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons size={28} name="house" color={color} />
+            <MaterialIcons size={28} name="bookmark-outline" color={color} />
           ),
-          headerShown: false,
+          headerShown: true,
         }}
       />
       <Tabs.Screen
@@ -39,9 +49,9 @@ export default function RootLayout() {
         options={{
           title: "About",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons size={28} name="info" color={color} />
+            <MaterialIcons size={28} name="info-outline" color={color} />
           ),
-          headerShown: false,
+          headerShown: true,
         }}
       />
     </Tabs>
