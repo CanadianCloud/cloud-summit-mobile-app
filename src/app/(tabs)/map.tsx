@@ -8,7 +8,7 @@ import {
   Text,
   TouchableOpacity,
   TouchableWithoutFeedback,
-  View,
+  View
 } from "react-native";
 import Animated, {
   useAnimatedStyle,
@@ -86,8 +86,135 @@ export default function MapScreen() {
       { id: "wash_women_f1", title: "Women's Washrooms", icon: require("../../../assets/images/Icons/Washrooms.png"), top: "43.0%", left: "52.0%", width: 25, height: 25 }
     ],
     floor2: [
-        { id: "main_stage", title: "Main stage", icon: require("../../../assets/images/Icons/Main_stage.png"), top: "54.0%", left: "65.5%", width: 40, height: 40 },
-       { id: "cloud_chamber", title: "Cloud chamber", icon: require("../../../assets/images/Icons/Cloud_chamber.png"), top: "30.5%", left: "47.5%", width: 40, height: 40 },
+      {
+        id: "main_stage",
+        title: "Main stage",
+        icon: require("../../../assets/images/Icons/Main_stage.png"),
+        top: "58.01%",
+        left: "51.59%",
+        width: 25,
+        height: 25
+      },
+      { id: "cloud_chamber",
+        title: "Cloud chamber",
+        icon: require("../../../assets/images/Icons/Cloud_chamber.png"),
+        top: "40.79%",
+        left: "26.57%",
+        width: 25,
+        height: 25
+      },
+
+      {
+        id: "ai_exp",
+        title: "Artificial Intelligence experience",
+        icon: require("../../../assets/images/Icons/Artifical_Intelligence_experience.png"),
+        top: "42.760%",
+        left: "21.50%",
+        width: 25,
+        height: 25
+      },
+      
+      
+      { id: "hackathon_room",
+        title: "Hackathon teams room",
+        icon: require("../../../assets/images/Icons/Hackathon_teams_room.png"),
+        top: "40.7%",
+        left: "39.37%",
+        width: 25,
+        height: 25
+       },
+      { id: "sound_exp",
+        title: "Sound and visual experience",
+        icon: require("../../../assets/images/Icons/Sound_and_visual_experience.png"),
+        top: "45.24%",
+        left: "29.26%",
+        width: 20,
+        height: 20
+      },
+      { id: "venue_map_f2",
+        title: "Venue map and schedule",
+        icon: require("../../../assets/images/Icons/Venue_map_and_schedule.png"),
+        top: "51.2%",
+        left: "42%",
+        width: 20,
+        height: 20 
+      },
+      { 
+        id: "cloud_security",
+        title: "Cloud security experience",
+        icon: require("../../../assets/images/Icons/Cloud_security_experience.png"),
+        top: "57.08%",
+        left: "37%",
+        width: 20,
+        height: 20 
+      },
+      { 
+        id: "water_f2",
+        title: "Water refill station",
+        icon: require("../../../assets/images/Icons/Water_refill_station.png"),
+        top: "46%",
+        left: "53.8%",
+        width: 20,
+        height: 20
+      },
+      { 
+        id: "quiet_area",
+        title: "Quiet area to take phone calls",
+        icon: require("../../../assets/images/Icons/Quiet_area_to_take_phone_calls.png"),
+        top: "47.40%",
+        left: "60.74%",
+        width: 25,
+        height: 25
+      },
+      { id: "lockers_f2",
+        title: "Lockers 1 dollar",
+        icon: require("../../../assets/images/Icons/Lockers_1_dollar.png"),
+        top: "52.81%", 
+        left: "44.55%",
+        width: 23,
+        height: 23 
+      },
+      { id: "no_food",
+        title: "No food or drink allowed",
+        icon: require("../../../assets/images/Icons/No_food_or_drink_allowed.png"),
+        top: "45.%",
+        left: "35.74%",
+        width: 20,
+        height: 20 
+      },
+      { 
+        id: "after_party",
+        title: "After party entrance",
+        icon: require("../../../assets/images/Icons/After_party_enterance.png"),
+        top: "58.27%",
+        left: "29.26%",
+        width: 25,
+        height: 25
+      },
+      { id: "wash_men_f2",
+        title: "Men's Washrooms",
+        icon: require("../../../assets/images/Icons/Washrooms.png"),
+        top: "48.01%",
+        left: "43%",
+        width: 25,
+        height: 25
+      },
+      { id: "wash_women_f2",
+        title: "Women's Washrooms",
+        icon: require("../../../assets/images/Icons/Washrooms.png"),
+        top: "45.11%",
+        left: "48.91%",
+        width: 25,
+        height: 25
+      },
+      { id: "elev_f2",
+        title: "Elevator",
+        icon: require("../../../assets/images/Icons/Elevator.png"),
+        top: "46.03%",
+        left: "68.00%",
+        width: 25,
+        height: 25
+      }
     ],
   }), []);
 
@@ -100,11 +227,11 @@ export default function MapScreen() {
     const { locationX, locationY } = event.nativeEvent;
     const topPercent = ((locationY / MAP_HEIGHT) * 100).toFixed(2);
     const leftPercent = ((locationX / screenWidth) * 100).toFixed(2);
-    
+
     console.log("--- New Marker Coordinates ---");
     console.log(`top: "${topPercent}%", left: "${leftPercent}%"`);
     console.log("------------------------------");
-    
+
     // وقتی جای خالی کلیک می‌شود، فوکوس قبلی حذف شود
     setActiveMarkerId(null);
   };
@@ -116,7 +243,7 @@ export default function MapScreen() {
 
     scrollRef.current?.scrollTo({
       x: leftPos - screenWidth / 2 + marker.width / 2,
-      y: topPos - 200, 
+      y: topPos - 200,
       animated: true,
     });
   };
@@ -137,8 +264,8 @@ export default function MapScreen() {
               resizeMode="contain"
             >
               {currentMarkers.map((marker) => (
-                <TouchableOpacity 
-                  key={marker.id} 
+                <TouchableOpacity
+                  key={marker.id}
                   onPress={() => focusOnMarker(marker)}
                   style={[styles.markerTouchable, { top: marker.top as any, left: marker.left as any, width: marker.width, height: marker.height }]}
                 >
@@ -178,8 +305,9 @@ export default function MapScreen() {
       </View>
     </View>
   );
-}
+} // <--- آکولاد بستن تابع MapScreen باید اینجا باشد
 
+// حالا styles را خارج از تابع تعریف کن
 const styles = StyleSheet.create({
   container: { flex: 1, backgroundColor: "#fff" },
   scrollContent: { flexGrow: 1 },
