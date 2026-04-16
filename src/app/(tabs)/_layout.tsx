@@ -1,9 +1,23 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Tabs } from "expo-router";
 
+import { COLORS } from "@/theme/colors";
+
 export default function RootLayout() {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        headerStyle: { backgroundColor: COLORS.panelDark },
+        headerTintColor: "rgba(255,255,255,0.9)",
+        headerTitleStyle: { fontWeight: "600" },
+        tabBarStyle: {
+          backgroundColor: COLORS.appMenu,
+          borderTopColor: "rgba(255,255,255,0.10)",
+        },
+        tabBarActiveTintColor: "#60A5FA",
+        tabBarInactiveTintColor: "rgba(255,255,255,0.55)",
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
@@ -21,7 +35,7 @@ export default function RootLayout() {
           tabBarIcon: ({ color }) => (
             <MaterialIcons size={28} name="calendar-today" color={color} />
           ),
-          headerShown: true,
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -31,7 +45,7 @@ export default function RootLayout() {
           tabBarIcon: ({ color }) => (
             <MaterialIcons size={28} name="map" color={color} />
           ),
-          headerShown: true,
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -41,7 +55,7 @@ export default function RootLayout() {
           tabBarIcon: ({ color }) => (
             <MaterialIcons size={28} name="bookmark-outline" color={color} />
           ),
-          headerShown: true,
+          headerShown: false,
         }}
       />
       <Tabs.Screen
@@ -51,7 +65,7 @@ export default function RootLayout() {
           tabBarIcon: ({ color }) => (
             <MaterialIcons size={28} name="info-outline" color={color} />
           ),
-          headerShown: true,
+          headerShown: false,
         }}
       />
     </Tabs>
