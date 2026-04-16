@@ -37,7 +37,10 @@ const AnimatedMarker = ({ marker, isActive }: { marker: MarkerType, isActive: bo
   useEffect(() => {
     if (isActive) {
       translateY.value = withRepeat(
-        withSequence(withTiming(-15, { duration: 300 }), withTiming(0, { duration: 300 })),
+        withSequence(
+          withTiming(-15, { duration: 300 }),
+          withTiming(0, { duration: 300 })
+        ),
         -1,
         true
       );
@@ -54,24 +57,22 @@ const AnimatedMarker = ({ marker, isActive }: { marker: MarkerType, isActive: bo
     <Animated.View style={[styles.markerContainer, { width: marker.width, height: marker.height }, animatedStyle]}>
       <Image
         source={marker.icon}
-        style={[styles.fullIcon, isActive && { tintColor: '#1e90ff' }]}
+        style={styles.fullIcon} // tintColor حذف شد تا رنگ اصلی حفظ شود
         resizeMode="contain"
       />
     </Animated.View>
   );
 };
 
-// ... (ایمپورت‌ها و اینترفیس ثابت می‌مانند)
-
 export default function MapScreen() {
   const [floor, setFloor] = useState(1);
   const [activeMarkerId, setActiveMarkerId] = useState<string | null>(null);
   const scrollRef = useRef<ScrollView>(null);
 
-  // تعریف صحیح مارکرها
   const allMarkers = React.useMemo(() => ({
     floor1: [
-      { id: "v_lounge",
+      {
+        id: "v_lounge",
         title: "Volunteers lounge",
         icon: require("../../../assets/images/Icons/Volunteers_lounge_restricted_access.png"),
         top: "47.22%",
@@ -79,7 +80,8 @@ export default function MapScreen() {
         width: 25,
         height: 25
       },
-      { id: "s_lounge",
+      {
+        id: "s_lounge",
         title: "Speakers lounge",
         icon: require("../../../assets/images/Icons/Speakers_lounge_restricted_access.png"),
         top: "48.68%",
@@ -87,7 +89,8 @@ export default function MapScreen() {
         width: 25,
         height: 25
       },
-      { id: "c_lounge",
+      {
+        id: "c_lounge",
         title: "Community lounge",
         icon: require("../../../assets/images/Icons/Community_lounge_food_and_drinks.png"),
         top: "58.75%",
@@ -95,14 +98,16 @@ export default function MapScreen() {
         width: 25,
         height: 25
       },
-      { id: "water_f1",
+      {
+        id: "water_f1",
         title: "Water refill station",
         icon: require("../../../assets/images/Icons/Water_refill_station.png"),
         top: "58.93%", left: "41.20%",
         width: 20,
         height: 20
       },
-      { id: "reg_tickets",
+      {
+        id: "reg_tickets",
         title: "Registration and tickets",
         icon: require("../../../assets/images/Icons/Registration_and_tickets.png"),
         top: "45.66%",
@@ -111,7 +116,7 @@ export default function MapScreen() {
         height: 20
       },
       // { id: "venue_map_f1", title: "Venue map and schedule", icon: require("../../../assets/images/Icons/Venue_map_and_schedule.png"), top: "40.5%", left: "39.5%", width: 35, height: 35 },
-      { 
+      {
         id: "entrance",
         title: "Entrance and exit",
         icon: require("../../../assets/images/Icons/Enterance_and_exit.png"),
@@ -120,7 +125,8 @@ export default function MapScreen() {
         width: 25,
         height: 25
       },
-      { id: "lockers_f1",
+      {
+        id: "lockers_f1",
         title: "Lockers 1 dollar",
         icon: require("../../../assets/images/Icons/Lockers_1_dollar.png"),
         top: "58.08%",
@@ -128,21 +134,24 @@ export default function MapScreen() {
         width: 20,
         height: 20
       },
-      { id: "c_stage",
+      {
+        id: "c_stage",
         title: "Community stage",
         icon: require("../../../assets/images/Icons/Community_stage.png"),
         top: "53.32%", left: "26.50%",
         width: 25,
-        height: 25 
+        height: 25
       },
-      { id: "c_experience",
+      {
+        id: "c_experience",
         title: "Cloud community experience",
         icon: require("../../../assets/images/Icons/Cloud_community_experience.png"),
         top: "49.75%", left: "25.74%",
         width: 20,
         height: 20
       },
-      { id: "elev_f1_1",
+      {
+        id: "elev_f1_1",
         title: "Elevator Number 1",
         icon: require("../../../assets/images/Icons/Elevator.png"),
         top: "50.86%",
@@ -150,7 +159,8 @@ export default function MapScreen() {
         width: 20,
         height: 20
       },
-      { id: "elev_f1_2",
+      {
+        id: "elev_f1_2",
         title: "Elevator Number 2",
         icon: require("../../../assets/images/Icons/Elevator.png"),
         top: "47.94%", left: "60.11%",
@@ -158,14 +168,15 @@ export default function MapScreen() {
         height: 20
       },
 
-      { id: "wash_men_f1",
+      {
+        id: "wash_men_f1",
         title: "Men's Washrooms",
         icon: require("../../../assets/images/Icons/Washrooms.png"),
         top: "55.66%", left: "40.76%",
         width: 20,
-        height: 20 
+        height: 20
       },
-      { 
+      {
         id: "wash_women_f1",
         title: "Women's Washrooms",
         icon: require("../../../assets/images/Icons/Washrooms.png"),
@@ -184,7 +195,8 @@ export default function MapScreen() {
         width: 25,
         height: 25
       },
-      { id: "cloud_chamber",
+      {
+        id: "cloud_chamber",
         title: "Cloud chamber",
         icon: require("../../../assets/images/Icons/Cloud_chamber.png"),
         top: "40.79%",
@@ -202,17 +214,19 @@ export default function MapScreen() {
         width: 25,
         height: 25
       },
-      
-      
-      { id: "hackathon_room",
+
+
+      {
+        id: "hackathon_room",
         title: "Hackathon teams room",
         icon: require("../../../assets/images/Icons/Hackathon_teams_room.png"),
         top: "40.7%",
         left: "39.37%",
         width: 25,
         height: 25
-       },
-      { id: "sound_exp",
+      },
+      {
+        id: "sound_exp",
         title: "Sound and visual experience",
         icon: require("../../../assets/images/Icons/Sound_and_visual_experience.png"),
         top: "45.24%",
@@ -220,24 +234,25 @@ export default function MapScreen() {
         width: 20,
         height: 20
       },
-      { id: "venue_map_f2",
+      {
+        id: "venue_map_f2",
         title: "Venue map and schedule",
         icon: require("../../../assets/images/Icons/Venue_map_and_schedule.png"),
         top: "51.2%",
         left: "42%",
         width: 20,
-        height: 20 
+        height: 20
       },
-      { 
+      {
         id: "cloud_security",
         title: "Cloud security experience",
         icon: require("../../../assets/images/Icons/Cloud_security_experience.png"),
         top: "57.08%",
         left: "37%",
         width: 20,
-        height: 20 
+        height: 20
       },
-      { 
+      {
         id: "water_f2",
         title: "Water refill station",
         icon: require("../../../assets/images/Icons/Water_refill_station.png"),
@@ -246,7 +261,7 @@ export default function MapScreen() {
         width: 20,
         height: 20
       },
-      { 
+      {
         id: "quiet_area",
         title: "Quiet area to take phone calls",
         icon: require("../../../assets/images/Icons/Quiet_area_to_take_phone_calls.png"),
@@ -255,23 +270,25 @@ export default function MapScreen() {
         width: 25,
         height: 25
       },
-      { id: "lockers_f2",
+      {
+        id: "lockers_f2",
         title: "Lockers 1 dollar",
         icon: require("../../../assets/images/Icons/Lockers_1_dollar.png"),
-        top: "52.81%", 
+        top: "52.81%",
         left: "44.55%",
         width: 23,
-        height: 23 
+        height: 23
       },
-      { id: "no_food",
+      {
+        id: "no_food",
         title: "No food or drink allowed",
         icon: require("../../../assets/images/Icons/No_food_or_drink_allowed.png"),
         top: "45.%",
         left: "35.74%",
         width: 20,
-        height: 20 
+        height: 20
       },
-      { 
+      {
         id: "after_party",
         title: "After party entrance",
         icon: require("../../../assets/images/Icons/After_party_enterance.png"),
@@ -280,7 +297,8 @@ export default function MapScreen() {
         width: 25,
         height: 25
       },
-      { id: "wash_men_f2",
+      {
+        id: "wash_men_f2",
         title: "Men's Washrooms",
         icon: require("../../../assets/images/Icons/Washrooms.png"),
         top: "48.01%",
@@ -288,7 +306,8 @@ export default function MapScreen() {
         width: 25,
         height: 25
       },
-      { id: "wash_women_f2",
+      {
+        id: "wash_women_f2",
         title: "Women's Washrooms",
         icon: require("../../../assets/images/Icons/Washrooms.png"),
         top: "45.11%",
@@ -296,7 +315,8 @@ export default function MapScreen() {
         width: 25,
         height: 25
       },
-      { id: "elev_f2_1",
+      {
+        id: "elev_f2_1",
         title: "Elevator Number 1",
         icon: require("../../../assets/images/Icons/Elevator.png"),
         top: "46.03%",
@@ -304,7 +324,8 @@ export default function MapScreen() {
         width: 25,
         height: 25
       },
-      { id: "elev_f2_2",
+      {
+        id: "elev_f2_2",
         title: "Elevator Number 2",
         icon: require("../../../assets/images/Icons/Elevator.png"),
         top: "49.41%", left: "35.81%",
@@ -315,21 +336,13 @@ export default function MapScreen() {
     ],
   }), []);
 
-  // اصلاح ارجاع به allMarkers
   const currentMarkers = floor === 1 ? allMarkers.floor1 : allMarkers.floor2;
 
-
-  // تابع به دست آوردن مختصات برای جایگذاری مارکرهای جدید
   const handleMapPress = (event: any) => {
     const { locationX, locationY } = event.nativeEvent;
     const topPercent = ((locationY / MAP_HEIGHT) * 100).toFixed(2);
     const leftPercent = ((locationX / screenWidth) * 100).toFixed(2);
-
-    console.log("--- New Marker Coordinates ---");
     console.log(`top: "${topPercent}%", left: "${leftPercent}%"`);
-    console.log("------------------------------");
-
-    // وقتی جای خالی کلیک می‌شود، فوکوس قبلی حذف شود
     setActiveMarkerId(null);
   };
 
@@ -347,6 +360,23 @@ export default function MapScreen() {
 
   return (
     <View style={styles.container}>
+      {/* Tabs (At the top) */}
+      <View style={styles.tabContainer}>
+        <TouchableOpacity
+          onPress={() => { setFloor(1); setActiveMarkerId(null); }}
+          style={[styles.tab, floor === 1 && styles.activeTab]}
+        >
+          <Text style={floor === 1 ? styles.activeTabText : styles.tabText}>Level 1</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity
+          onPress={() => { setFloor(2); setActiveMarkerId(null); }}
+          style={[styles.tab, floor === 2 && styles.activeTab]}
+        >
+          <Text style={floor === 2 ? styles.activeTabText : styles.tabText}>Level 2</Text>
+        </TouchableOpacity>
+      </View>
+
       <ScrollView
         ref={scrollRef}
         maximumZoomScale={5}
@@ -374,54 +404,174 @@ export default function MapScreen() {
         </TouchableWithoutFeedback>
       </ScrollView>
 
-      {/* Legend Area */}
+      {/* Legend Area (Bottom) */}
       <View style={styles.legendContainer}>
-        <Text style={styles.legendTitle}>Map Legend (Click to Find)</Text>
-        <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {currentMarkers.map((marker) => (
-            <TouchableOpacity
-              key={marker.id}
-              style={[styles.legendItem, activeMarkerId === marker.id && styles.activeLegendItem]}
-              onPress={() => focusOnMarker(marker)}
-            >
-              <Image source={marker.icon} style={[styles.legendIcon, activeMarkerId === marker.id && { tintColor: '#1e90ff' }]} />
-              <Text style={[styles.legendText, activeMarkerId === marker.id && styles.activeLegendText]}>{marker.title}</Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
-      </View>
+        <Text style={styles.legendTitle}>Tap to find • Scroll for more</Text>
 
-      {/* Tabs */}
-      <View style={styles.tabContainer}>
-        <TouchableOpacity onPress={() => { setFloor(1); setActiveMarkerId(null); }} style={[styles.tab, floor === 1 && styles.activeTab]}>
-          <Text style={floor === 1 ? styles.activeTabText : styles.tabText}>Level 1</Text>
-        </TouchableOpacity>
-        <TouchableOpacity onPress={() => { setFloor(2); setActiveMarkerId(null); }} style={[styles.tab, floor === 2 && styles.activeTab]}>
-          <Text style={floor === 2 ? styles.activeTabText : styles.tabText}>Level 2</Text>
-        </TouchableOpacity>
+        {/* اضافه کردن اسکرول عمودی با ارتفاع محدود */}
+        <ScrollView
+          style={styles.legendScrollArea}
+          showsVerticalScrollIndicator={true}
+        >
+          <View style={styles.legendList}>
+            {currentMarkers.map((marker) => (
+              <TouchableOpacity
+                key={marker.id}
+                style={[
+                  styles.legendItem,
+                  activeMarkerId === marker.id && styles.activeLegendItem
+                ]}
+                onPress={() => focusOnMarker(marker)}
+              >
+                <Image
+                  source={marker.icon}
+                  style={styles.legendIcon}
+                />
+                <Text
+                  style={[styles.legendText, activeMarkerId === marker.id && styles.activeLegendText]}
+                  numberOfLines={1}
+                >
+                  {marker.title}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
+        </ScrollView>
       </View>
     </View>
   );
-} // <--- آکولاد بستن تابع MapScreen باید اینجا باشد
+}
 
-// حالا styles را خارج از تابع تعریف کن
 const styles = StyleSheet.create({
-  container: { flex: 1, backgroundColor: "#fff" },
-  scrollContent: { flexGrow: 1 },
-  mapImage: { width: screenWidth, height: MAP_HEIGHT },
-  markerTouchable: { position: 'absolute', zIndex: 10 },
-  markerContainer: { alignItems: "center", justifyContent: "center" },
-  fullIcon: { width: "100%", height: "100%" },
-  legendContainer: { padding: 15, backgroundColor: '#f9f9f9', borderTopWidth: 1, borderColor: '#eee' },
-  legendTitle: { fontSize: 13, fontWeight: 'bold', marginBottom: 8, color: '#666' },
-  legendItem: { flexDirection: 'row', alignItems: 'center', backgroundColor: '#fff', padding: 8, borderRadius: 10, marginRight: 10, borderWidth: 1, borderColor: '#ddd' },
-  activeLegendItem: { borderColor: '#1e90ff', backgroundColor: '#e6f2ff' },
-  legendIcon: { width: 18, height: 18, marginRight: 6 },
-  legendText: { fontSize: 11, color: '#444' },
-  activeLegendText: { color: '#1e90ff', fontWeight: 'bold' },
-  tabContainer: { flexDirection: "row", paddingVertical: 15, justifyContent: "center", backgroundColor: '#fff' },
-  tab: { paddingHorizontal: 18, paddingVertical: 8, borderRadius: 15, backgroundColor: "#f1f2f6", marginHorizontal: 5 },
-  activeTab: { backgroundColor: "#1e90ff" },
-  tabText: { color: "#57606f", fontWeight: "600" },
-  activeTabText: { color: "#fff", fontWeight: "bold" },
+  // محفظه اصلی صفحه
+  container: { 
+    flex: 1, 
+    backgroundColor: "#fff", 
+    paddingTop: 40 
+  },
+
+  // استایل اسکرول ویو نقشه
+  scrollContent: { 
+    flexGrow: 1 
+  },
+
+  // تصویر نقشه
+  mapImage: { 
+    width: screenWidth, 
+    height: MAP_HEIGHT 
+  },
+
+  // تاچ‌بل‌های روی نقشه (مارکرها)
+  markerTouchable: { 
+    position: 'absolute', 
+    zIndex: 10 
+  },
+
+  // کانتینر داخلی انیمیشن مارکر
+  markerContainer: { 
+    alignItems: "center", 
+    justifyContent: "center" 
+  },
+
+  // آیکون مارکر
+  fullIcon: { 
+    width: "100%", 
+    height: "100%" 
+  },
+
+  // --- بخش Legend (پایین صفحه) ---
+  legendContainer: { 
+    padding: 15, 
+    backgroundColor: '#f9f9f9', 
+    borderTopWidth: 1, 
+    borderColor: '#eee',
+    paddingBottom: 10,
+  },
+
+  legendTitle: { 
+    fontSize: 13, 
+    fontWeight: 'bold', 
+    marginBottom: 12, 
+    color: '#666' 
+  },
+
+  // ایجاد محدودیت ارتفاع برای ۵ ردیف و قابلیت اسکرول
+  legendScrollArea: {
+    maxHeight: 210, 
+  },
+
+  // چیدمان دو ستونی آیتم‌ها
+  legendList: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
+    paddingBottom: 5,
+  },
+
+  // هر آیتم در لیست لگند
+  legendItem: { 
+    flexDirection: 'row', 
+    alignItems: 'center', 
+    backgroundColor: '#fff', 
+    padding: 8, 
+    borderRadius: 10, 
+    marginBottom: 8, 
+    borderWidth: 1, 
+    borderColor: '#ddd',
+    width: '48.5%', // اختصاص فضا برای دو ستون
+  },
+
+  activeLegendItem: { 
+    borderColor: '#1e90ff', 
+    backgroundColor: '#e6f2ff' 
+  },
+
+  legendIcon: { 
+    width: 18, 
+    height: 18, 
+    marginRight: 6 
+  },
+
+  legendText: { 
+    fontSize: 10, 
+    color: '#444', 
+    flex: 1 
+  },
+
+  activeLegendText: { 
+    color: '#1e90ff', 
+    fontWeight: 'bold' 
+  },
+
+  // --- استایل‌های تب (Level 1 / Level 2) ---
+  tabContainer: { 
+    flexDirection: "row", 
+    paddingVertical: 15, 
+    justifyContent: "center", 
+    backgroundColor: '#fff', 
+    borderBottomWidth: 1, 
+    borderColor: '#f0f0f0' 
+  },
+
+  tab: { 
+    paddingHorizontal: 25, 
+    paddingVertical: 10, 
+    borderRadius: 20, 
+    backgroundColor: "#f1f2f6", 
+    marginHorizontal: 8 
+  },
+
+  activeTab: { 
+    backgroundColor: "#1e90ff" 
+  },
+
+  tabText: { 
+    color: "#57606f", 
+    fontWeight: "600" 
+  },
+
+  activeTabText: { 
+    color: "#fff", 
+    fontWeight: "bold" 
+  },
 });
