@@ -129,10 +129,37 @@ export default function MapScreen() {
         height: 20
       },
       // { id: "c_stage", title: "Community stage", icon: require("../../../assets/images/Icons/Community_stage.png"), top: "41.5%", left: "36.5%", width: 35, height: 35 },
-      // { id: "c_experience", title: "Cloud community experience", icon: require("../../../assets/images/Icons/Cloud_community_experience.png"), top: "33.5%", left: "37.5%", width: 35, height: 35 },
-      // { id: "elev_f1", title: "Elevator", icon: require("../../../assets/images/Icons/Elevator.png"), top: "34.5%", left: "41.5%", width: 35, height: 35 },
-      // { id: "wash_men_f1", title: "Men's Washrooms", icon: require("../../../assets/images/Icons/Washrooms.png"), top: "43.0%", left: "49.5%", width: 25, height: 25 },
-      // { id: "wash_women_f1", title: "Women's Washrooms", icon: require("../../../assets/images/Icons/Washrooms.png"), top: "43.0%", left: "52.0%", width: 25, height: 25 }
+      { id: "c_experience",
+        title: "Cloud community experience",
+        icon: require("../../../assets/images/Icons/Cloud_community_experience.png"),
+        top: "49.75%", left: "25.74%",
+        width: 20,
+        height: 20
+      },
+      { id: "elev_f1",
+        title: "Elevator",
+        icon: require("../../../assets/images/Icons/Elevator.png"),
+        top: "50.86%",
+        left: "30.20%",
+        width: 20,
+        height: 20
+      },
+
+      { id: "wash_men_f1",
+        title: "Men's Washrooms",
+        icon: require("../../../assets/images/Icons/Washrooms.png"),
+        top: "55.66%", left: "40.76%",
+        width: 20,
+        height: 20 
+      },
+      { 
+        id: "wash_women_f1",
+        title: "Women's Washrooms",
+        icon: require("../../../assets/images/Icons/Washrooms.png"),
+        top: "55.03%", left: "45.94%",
+        width: 20,
+        height: 20
+      }
     ],
     floor2: [
       {
