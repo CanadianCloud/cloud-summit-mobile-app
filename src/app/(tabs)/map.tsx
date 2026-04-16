@@ -128,7 +128,13 @@ export default function MapScreen() {
         width: 20,
         height: 20
       },
-      // { id: "c_stage", title: "Community stage", icon: require("../../../assets/images/Icons/Community_stage.png"), top: "41.5%", left: "36.5%", width: 35, height: 35 },
+      { id: "c_stage",
+        title: "Community stage",
+        icon: require("../../../assets/images/Icons/Community_stage.png"),
+        top: "53.32%", left: "26.50%",
+        width: 25,
+        height: 25 
+      },
       { id: "c_experience",
         title: "Cloud community experience",
         icon: require("../../../assets/images/Icons/Cloud_community_experience.png"),
