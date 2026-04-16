@@ -142,11 +142,18 @@ export default function MapScreen() {
         width: 20,
         height: 20
       },
-      { id: "elev_f1",
-        title: "Elevator",
+      { id: "elev_f1_1",
+        title: "Elevator Number 1",
         icon: require("../../../assets/images/Icons/Elevator.png"),
         top: "50.86%",
         left: "30.20%",
+        width: 20,
+        height: 20
+      },
+      { id: "elev_f1_2",
+        title: "Elevator Number 2",
+        icon: require("../../../assets/images/Icons/Elevator.png"),
+        top: "47.94%", left: "60.11%",
         width: 20,
         height: 20
       },
@@ -289,14 +296,22 @@ export default function MapScreen() {
         width: 25,
         height: 25
       },
-      { id: "elev_f2",
-        title: "Elevator",
+      { id: "elev_f2_1",
+        title: "Elevator Number 1",
         icon: require("../../../assets/images/Icons/Elevator.png"),
         top: "46.03%",
         left: "68.00%",
         width: 25,
         height: 25
-      }
+      },
+      { id: "elev_f2_2",
+        title: "Elevator Number 2",
+        icon: require("../../../assets/images/Icons/Elevator.png"),
+        top: "49.41%", left: "35.81%",
+        width: 25,
+        height: 25
+      },
+
     ],
   }), []);
 
