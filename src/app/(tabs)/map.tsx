@@ -116,28 +116,255 @@ export default function MapScreen() {
 
   const allMarkers = React.useMemo(() => ({
     floor1: [
-      { id: "v_lounge", title: "Volunteers lounge", icon: require("../../../assets/images/Icons/Volunteers_lounge_restricted_access.png"), top: "47.22%", left: "18.70%", width: 25, height: 25 },
-      { id: "s_lounge", title: "Speakers lounge", icon: require("../../../assets/images/Icons/Speakers_lounge_restricted_access.png"), top: "48.68%", left: "9.72%", width: 25, height: 25 },
-      { id: "c_lounge", title: "Community lounge", icon: require("../../../assets/images/Icons/Community_lounge_food_and_drinks.png"), top: "58.75%", left: "16.20%", width: 25, height: 25 },
-      { id: "water_f1", title: "Water refill station", icon: require("../../../assets/images/Icons/Water_refill_station.png"), top: "58.93%", left: "41.20%", width: 20, height: 20 },
-      { id: "reg_tickets", title: "Registration and tickets", icon: require("../../../assets/images/Icons/Registration_and_tickets.png"), top: "45.66%", left: "72.68%", width: 20, height: 20 },
-      { id: "entrance", title: "Entrance and exit", icon: require("../../../assets/images/Icons/Enterance_and_exit.png"), top: "50.91%", left: "78.70%", width: 25, height: 25 },
-      { id: "lockers_f1", title: "Lockers 1 dollar", icon: require("../../../assets/images/Icons/Lockers_1_dollar.png"), top: "58.08%", left: "35.85%", width: 20, height: 20 },
-      { id: "c_stage", title: "Community stage", icon: require("../../../assets/images/Icons/Community_stage.png"), top: "53.32%", left: "26.50%", width: 25, height: 25 },
-      { id: "c_experience", title: "Cloud community experience", icon: require("../../../assets/images/Icons/Cloud_community_experience.png"), top: "49.75%", left: "25.74%", width: 20, height: 20 },
-      { id: "elev_f1_1", title: "Elevator Number 1", icon: require("../../../assets/images/Icons/Elevator.png"), top: "50.86%", left: "30.20%", width: 20, height: 20 },
-      { id: "elev_f1_2", title: "Elevator Number 2", icon: require("../../../assets/images/Icons/Elevator.png"), top: "47.94%", left: "60.11%", width: 20, height: 20 },
-      { id: "wash_men_f1", title: "Men's Washrooms", icon: require("../../../assets/images/Icons/Washrooms.png"), top: "55.66%", left: "40.76%", width: 20, height: 20 },
-      { id: "wash_women_f1", title: "Women's Washrooms", icon: require("../../../assets/images/Icons/Washrooms.png"), top: "55.03%", left: "45.94%", width: 20, height: 20 }
+      { id: "v_lounge",
+        title: "Volunteers lounge",
+        icon: require("../../../assets/images/Icons/Volunteers_lounge_restricted_access.png"),
+        top: "47.22%",
+        left: "18.70%",
+        width: 25,
+        height: 25
+      },
+      { id: "s_lounge",
+        title: "Speakers lounge",
+        icon: require("../../../assets/images/Icons/Speakers_lounge_restricted_access.png"),
+        top: "48.68%",
+        left: "9.72%",
+        width: 25,
+        height: 25
+      },
+      { id: "c_lounge",
+        title: "Community lounge",
+        icon: require("../../../assets/images/Icons/Community_lounge_food_and_drinks.png"),
+        top: "58.75%",
+        left: "16.20%",
+        width: 25,
+        height: 25
+      },
+      { id: "water_f1",
+        title: "Water refill station",
+        icon: require("../../../assets/images/Icons/Water_refill_station.png"),
+        top: "58.93%", left: "41.20%",
+        width: 20,
+        height: 20
+      },
+      { id: "reg_tickets",
+        title: "Registration and tickets",
+        icon: require("../../../assets/images/Icons/Registration_and_tickets.png"),
+        top: "45.66%",
+        left: "72.68%",
+        width: 20,
+        height: 20
+      },
+      // { id: "venue_map_f1", title: "Venue map and schedule", icon: require("../../../assets/images/Icons/Venue_map_and_schedule.png"), top: "40.5%", left: "39.5%", width: 35, height: 35 },
+      { 
+        id: "entrance",
+        title: "Entrance and exit",
+        icon: require("../../../assets/images/Icons/Enterance_and_exit.png"),
+        top: "50.91%",
+        left: "78.70%",
+        width: 25,
+        height: 25
+      },
+      { id: "lockers_f1",
+        title: "Lockers 1 dollar",
+        icon: require("../../../assets/images/Icons/Lockers_1_dollar.png"),
+        top: "58.08%",
+        left: "35.85%",
+        width: 20,
+        height: 20
+      },
+      { id: "c_stage",
+        title: "Community stage",
+        icon: require("../../../assets/images/Icons/Community_stage.png"),
+        top: "53.32%", left: "26.50%",
+        width: 25,
+        height: 25 
+      },
+      { id: "c_experience",
+        title: "Cloud community experience",
+        icon: require("../../../assets/images/Icons/Cloud_community_experience.png"),
+        top: "49.75%", left: "25.74%",
+        width: 20,
+        height: 20
+      },
+      { id: "elev_f1_1",
+        title: "Elevator first",
+        icon: require("../../../assets/images/Icons/Elevator.png"),
+        top: "50.86%",
+        left: "30.20%",
+        width: 20,
+        height: 20
+      },
+      { id: "elev_f1_2",
+        title: "Elevator second",
+        icon: require("../../../assets/images/Icons/Elevator.png"),
+        top: "47.94%", left: "60.11%",
+        width: 20,
+        height: 20
+      },
+
+      { id: "wash_men_f1",
+        title: "Men's Washrooms",
+        icon: require("../../../assets/images/Icons/Washrooms.png"),
+        top: "55.66%", left: "40.76%",
+        width: 20,
+        height: 20 
+      },
+      { 
+        id: "wash_women_f1",
+        title: "Women's Washrooms",
+        icon: require("../../../assets/images/Icons/Washrooms.png"),
+        top: "55.03%", left: "45.94%",
+        width: 20,
+        height: 20
+      }
     ],
     floor2: [
-      { id: "main_stage", title: "Main stage", icon: require("../../../assets/images/Icons/Main_stage.png"), top: "58.01%", left: "51.59%", width: 25, height: 25 },
-      { id: "cloud_chamber", title: "Cloud chamber", icon: require("../../../assets/images/Icons/Cloud_chamber.png"), top: "40.79%", left: "26.57%", width: 25, height: 25 },
-      { id: "ai_exp", title: "Artificial Intelligence experience", icon: require("../../../assets/images/Icons/Artifical_Intelligence_experience.png"), top: "42.76%", left: "21.50%", width: 25, height: 25 },
-      { id: "hackathon_room", title: "Hackathon teams room", icon: require("../../../assets/images/Icons/Hackathon_teams_room.png"), top: "40.7%", left: "39.37%", width: 25, height: 25 },
-      { id: "after_party", title: "After party entrance", icon: require("../../../assets/images/Icons/After_party_enterance.png"), top: "58.27%", left: "29.26%", width: 25, height: 25 },
-      { id: "wash_men_f2", title: "Men's Washrooms", icon: require("../../../assets/images/Icons/Washrooms.png"), top: "48.01%", left: "43%", width: 25, height: 25 },
-      { id: "wash_women_f2", title: "Women's Washrooms", icon: require("../../../assets/images/Icons/Washrooms.png"), top: "45.11%", left: "48.91%", width: 25, height: 25 }
+      {
+        id: "main_stage",
+        title: "Main stage",
+        icon: require("../../../assets/images/Icons/Main_stage.png"),
+        top: "58.01%",
+        left: "51.59%",
+        width: 25,
+        height: 25
+      },
+      { id: "cloud_chamber",
+        title: "Cloud chamber",
+        icon: require("../../../assets/images/Icons/Cloud_chamber.png"),
+        top: "40.79%",
+        left: "26.57%",
+        width: 25,
+        height: 25
+      },
+
+      {
+        id: "ai_exp",
+        title: "Artificial Intelligence experience",
+        icon: require("../../../assets/images/Icons/Artifical_Intelligence_experience.png"),
+        top: "42.760%",
+        left: "21.50%",
+        width: 25,
+        height: 25
+      },
+      
+      
+      { id: "hackathon_room",
+        title: "Hackathon teams room",
+        icon: require("../../../assets/images/Icons/Hackathon_teams_room.png"),
+        top: "40.7%",
+        left: "39.37%",
+        width: 25,
+        height: 25
+       },
+      { id: "sound_exp",
+        title: "Sound and visual experience",
+        icon: require("../../../assets/images/Icons/Sound_and_visual_experience.png"),
+        top: "45.24%",
+        left: "29.26%",
+        width: 20,
+        height: 20
+      },
+      { id: "venue_map_f2_1",
+        title: "Venue map/schedule first",
+        icon: require("../../../assets/images/Icons/Venue_map_and_schedule.png"),
+        top: "47.82%", left: "27.20%",
+        width: 20,
+        height: 20 
+      },
+      
+      { id: "venue_map_f2_2",
+        title: "Venue map/schedule second",
+        icon: require("../../../assets/images/Icons/Venue_map_and_schedule.png"),
+        top: "51.82%", left: "42.20%",
+        width: 20,
+        height: 20 
+      },
+
+      { 
+        id: "cloud_security",
+        title: "Cloud security experience",
+        icon: require("../../../assets/images/Icons/Cloud_security_experience.png"),
+        top: "57.08%",
+        left: "37%",
+        width: 20,
+        height: 20 
+      },
+      { 
+        id: "water_f2",
+        title: "Water refill station",
+        icon: require("../../../assets/images/Icons/Water_refill_station.png"),
+        top: "46%",
+        left: "53.8%",
+        width: 20,
+        height: 20
+      },
+      { 
+        id: "quiet_area",
+        title: "Quiet area to take phone calls",
+        icon: require("../../../assets/images/Icons/Quiet_area_to_take_phone_calls.png"),
+        top: "47.40%",
+        left: "60.74%",
+        width: 25,
+        height: 25
+      },
+      { id: "lockers_f2",
+        title: "Lockers 1 dollar",
+        icon: require("../../../assets/images/Icons/Lockers_1_dollar.png"),
+        top: "52.81%", 
+        left: "44.55%",
+        width: 23,
+        height: 23 
+      },
+      { id: "no_food",
+        title: "No food or drink allowed",
+        icon: require("../../../assets/images/Icons/No_food_or_drink_allowed.png"),
+        top: "45.%",
+        left: "35.74%",
+        width: 20,
+        height: 20 
+      },
+      { 
+        id: "after_party",
+        title: "After party entrance",
+        icon: require("../../../assets/images/Icons/After_party_enterance.png"),
+        top: "58.27%",
+        left: "29.26%",
+        width: 25,
+        height: 25
+      },
+      { id: "wash_men_f2",
+        title: "Men's Washrooms",
+        icon: require("../../../assets/images/Icons/Washrooms.png"),
+        top: "48.01%",
+        left: "43%",
+        width: 25,
+        height: 25
+      },
+      { id: "wash_women_f2",
+        title: "Women's Washrooms",
+        icon: require("../../../assets/images/Icons/Washrooms.png"),
+        top: "45.11%",
+        left: "48.91%",
+        width: 25,
+        height: 25
+      },
+      { id: "elev_f2_1",
+        title: "Elevator first",
+        icon: require("../../../assets/images/Icons/Elevator.png"),
+        top: "46.03%",
+        left: "68.00%",
+        width: 25,
+        height: 25
+      },
+      { id: "elev_f2_2",
+        title: "Elevator second",
+        icon: require("../../../assets/images/Icons/Elevator.png"),
+        top: "49.41%", left: "35.81%",
+        width: 25,
+        height: 25
+      },
+
     ],
   }), []);
 
