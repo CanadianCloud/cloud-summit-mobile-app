@@ -303,8 +303,6 @@ export default function MapScreen() {
         },
       ],
       floor2: [
-        // LEFT COLUMN
-
         {
           id: 'ai_exp',
           title: 'Artificial Intelligence',
