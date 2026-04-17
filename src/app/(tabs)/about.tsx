@@ -1,69 +1,69 @@
-import { Linking, Pressable, ScrollView, StyleSheet, View } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
+import { Linking, Pressable, ScrollView, StyleSheet, View } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-import AppText from "@/components/AppText";
-import { COLORS } from "@/theme/colors";
-import { TYPOGRAPHY } from "@/theme/typography";
+import AppText from '@/components/AppText';
+import { COLORS } from '@/theme/colors';
+import { TYPOGRAPHY } from '@/theme/typography';
 
 const committeeMembers = [
   {
-    name: "Matt Carolan",
-    url: "https://www.linkedin.com/in/matthewcarolan/",
+    name: 'Matt Carolan',
+    url: 'https://www.linkedin.com/in/matthewcarolan/',
   },
   {
-    name: "Bibi Souza",
-    url: "https://www.linkedin.com/in/bibschan/",
+    name: 'Bibi Souza',
+    url: 'https://www.linkedin.com/in/bibschan/',
   },
   {
-    name: "Andrey Barkov",
-    url: "https://www.linkedin.com/in/andreybarkov/",
+    name: 'Andrey Barkov',
+    url: 'https://www.linkedin.com/in/andreybarkov/',
   },
   {
-    name: "Warren Lyne",
-    url: "https://www.linkedin.com/in/warrenlyne/",
+    name: 'Warren Lyne',
+    url: 'https://www.linkedin.com/in/warrenlyne/',
   },
   {
-    name: "Fabio Simka Coutinho",
-    url: "https://www.linkedin.com/in/fabio-simka/",
+    name: 'Fabio Simka Coutinho',
+    url: 'https://www.linkedin.com/in/fabio-simka/',
   },
   {
-    name: "Jhan (Shanky) Silva",
-    url: "https://www.linkedin.com/in/shankyjs/",
+    name: 'Jhan (Shanky) Silva',
+    url: 'https://www.linkedin.com/in/shankyjs/',
   },
   {
-    name: "Michael Carlos",
-    url: "https://www.linkedin.com/in/mcarlos/",
+    name: 'Michael Carlos',
+    url: 'https://www.linkedin.com/in/mcarlos/',
   },
   {
-    name: "Nichanun Pong (Luck)",
-    url: "https://www.linkedin.com/in/nichanun-pong/",
+    name: 'Nichanun Pong (Luck)',
+    url: 'https://www.linkedin.com/in/nichanun-pong/',
   },
   {
-    name: "Fernando Stoelting",
-    url: "https://www.linkedin.com/in/fstoelting/",
+    name: 'Fernando Stoelting',
+    url: 'https://www.linkedin.com/in/fstoelting/',
   },
   {
-    name: "Philip Mak",
-    url: "https://www.linkedin.com/in/philip-mak-b2b92823a/",
+    name: 'Philip Mak',
+    url: 'https://www.linkedin.com/in/philip-mak-b2b92823a/',
   },
 ] as const;
 
 const creditMembers = [
   {
-    name: "Nichanun Pong (Luck)",
-    url: "https://www.linkedin.com/in/nichanun-pong/",
+    name: 'Nichanun Pong (Luck)',
+    url: 'https://www.linkedin.com/in/nichanun-pong/',
   },
   {
-    name: "Viet Anh Hoang",
-    url: "https://www.linkedin.com/in/viet-anh-hoang-a504911b1/",
+    name: 'Viet Anh Hoang',
+    url: 'https://www.linkedin.com/in/viet-anh-hoang-a504911b1/',
   },
   {
-    name: "Ahmad Salempour",
-    url: "https://www.linkedin.com/in/ahmad-salempoor/",
+    name: 'Ahmad Salempour',
+    url: 'https://www.linkedin.com/in/ahmad-salempoor/',
   },
   {
-    name: "Cassandra Carlos",
-    url: "https://www.linkedin.com/in/cassandracarlos/",
+    name: 'Cassandra Carlos',
+    url: 'https://www.linkedin.com/in/cassandracarlos/',
   },
 ] as const;
 
@@ -77,21 +77,48 @@ export default function About() {
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.card}>
           <AppText style={styles.cardBody}>
-            Cloud Summit is a community-driven platform connecting people who
-            are shaping the future of technology.
-            {"\n\n"}
+            Cloud Summit is a community-driven event connecting people who are
+            shaping the future of technology.
+            {'\n\n'}
             We bring together developers, engineers, and industry leaders to
             share knowledge, explore cloud innovations, and build meaningful
             connections.
-            {"\n\n"}
-            Our mission is simple:
-            {"\n"}
-            educate, inspire, and grow the tech community while giving back.
-            {"\n\n"}
-            As a non-profit initiative, we support local causes and create
-            opportunities for learning through events, talks, and hands-on
-            experiences.
-            {"\n\n"}
+            {'\n\n'}
+            Our mission is simple: educate, inspire, and grow the tech community
+            while giving back.
+          </AppText>
+          <AppText style={styles.cardBody}>
+            As a non-profit initiative, Cloud Summit is run by the Canadian
+            Cloud community. Learn more about the organization at{' '}
+            <AppText
+              style={styles.link}
+              onPress={() => Linking.openURL('https://www.CanadianCloud.org')}>
+              https://www.CanadianCloud.org
+            </AppText>
+            , explore upcoming events at{' '}
+            <AppText
+              style={styles.link}
+              onPress={() => Linking.openURL('https://www.CloudSummit.ca')}>
+              https://www.CloudSummit.ca
+            </AppText>
+            , and view the volunteers contributing to these events at{' '}
+            <AppText
+              style={styles.link}
+              onPress={() =>
+                Linking.openURL(
+                  'https://www.linkedin.com/company/canadiancloud',
+                )
+              }>
+              https://www.linkedin.com/company/canadiancloud
+            </AppText>
+            .
+          </AppText>
+
+          <AppText style={styles.cardBody}>
+            {'\n\n'}
+            We support local causes and create opportunities for learning
+            through events, talks, and hands-on experiences.
+            {'\n\n'}
             Join us and be part of the future of tech.
           </AppText>
         </View>
@@ -102,10 +129,9 @@ export default function About() {
             {committeeMembers.map((member) => (
               <Pressable
                 key={member.name}
-                accessibilityRole="link"
+                accessibilityRole='link'
                 onPress={() => Linking.openURL(member.url)}
-                style={styles.committeeItem}
-              >
+                style={styles.committeeItem}>
                 <AppText style={styles.committeeName}>{member.name}</AppText>
               </Pressable>
             ))}
@@ -113,15 +139,14 @@ export default function About() {
         </View>
 
         <View style={[styles.card, { marginTop: 12 }]}>
-          <AppText style={styles.cardTitle}>Credits</AppText>
+          <AppText style={styles.cardTitle}>App Team</AppText>
           <View style={styles.committeeGrid}>
             {creditMembers.map((member) => (
               <Pressable
                 key={member.name}
-                accessibilityRole="link"
+                accessibilityRole='link'
                 onPress={() => Linking.openURL(member.url)}
-                style={styles.committeeItem}
-              >
+                style={styles.committeeItem}>
                 <AppText style={styles.committeeName}>{member.name}</AppText>
               </Pressable>
             ))}
@@ -143,7 +168,7 @@ const styles = StyleSheet.create({
   card: {
     borderRadius: 18,
     borderWidth: StyleSheet.hairlineWidth,
-    borderColor: "rgba(255,255,255,0.12)",
+    borderColor: 'rgba(255,255,255,0.12)',
     backgroundColor: COLORS.panelDark,
     paddingHorizontal: 16,
     paddingVertical: 14,
@@ -155,17 +180,22 @@ const styles = StyleSheet.create({
   },
   committeeGrid: {
     marginTop: 12,
-    flexDirection: "row",
-    flexWrap: "wrap",
-    justifyContent: "space-between",
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    justifyContent: 'space-between',
   },
   committeeItem: {
-    width: "48%",
+    width: '48%',
     borderRadius: 14,
-    backgroundColor: "#111827",
+    backgroundColor: '#111827',
     paddingHorizontal: 12,
     paddingVertical: 10,
     marginBottom: 8,
   },
   committeeName: { ...TYPOGRAPHY.linkName },
+  link: {
+    ...TYPOGRAPHY.linkName,
+    color: '#60A5FA',
+    textDecorationLine: 'underline',
+  },
 });
