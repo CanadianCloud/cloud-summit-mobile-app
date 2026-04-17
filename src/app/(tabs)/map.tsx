@@ -151,11 +151,19 @@ export default function MapScreen() {
         title: "Registration and tickets",
         icon: require("../../../assets/images/Icons/Registration_and_tickets.png"),
         top: "45.66%",
-        left: "72.68%",
+        left: "70.68%",
         width: 20,
         height: 20
       },
-      // { id: "venue_map_f1", title: "Venue map and schedule", icon: require("../../../assets/images/Icons/Venue_map_and_schedule.png"), top: "40.5%", left: "39.5%", width: 35, height: 35 },
+      { 
+        id: "venue_map_f1",
+        title: "Venue map and schedule",
+        icon: require("../../../assets/images/Icons/Venue_map_and_schedule.png"),
+        top: "45.5%", 
+        left: "73.68%",
+        width: 20,
+        height: 20
+      },
       { 
         id: "entrance",
         title: "Entrance and exit",
