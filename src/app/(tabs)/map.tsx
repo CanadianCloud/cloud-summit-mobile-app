@@ -32,7 +32,6 @@ interface MarkerType {
   height: number;
 }
 
-// --- کامپوننت مارکر متحرک روی نقشه ---
 const AnimatedMarker = ({ marker, isActive }: { marker: MarkerType, isActive: boolean }) => {
   const translateY = useSharedValue(0);
 
@@ -59,7 +58,6 @@ const AnimatedMarker = ({ marker, isActive }: { marker: MarkerType, isActive: bo
   );
 };
 
-// --- کامپوننت آیتم لگند با قابلیت تشخیص موقعیت و افکت هوور ---
 const LegendItem = ({ 
   marker, 
   isActive, 
@@ -381,7 +379,6 @@ export default function MapScreen() {
   const focusOnMarker = (marker: MarkerType) => {
     setActiveMarkerId(marker.id);
     
-    // ۱. اسکرول نقشه به سمت مارکر
     const topPos = (parseFloat(marker.top) / 100) * MAP_HEIGHT;
     const leftPos = (parseFloat(marker.left) / 100) * screenWidth;
     mapScrollRef.current?.scrollTo({
@@ -390,11 +387,10 @@ export default function MapScreen() {
       animated: true,
     });
 
-    // ۲. اسکرول لگند به سمت آیتم مربوطه
     const itemY = itemPositions.current[marker.id];
     if (itemY !== undefined) {
       legendScrollRef.current?.scrollTo({
-        y: itemY - 10, // کمی فاصله از بالا برای زیبایی
+        y: itemY - 10, 
         animated: true,
       });
     }
