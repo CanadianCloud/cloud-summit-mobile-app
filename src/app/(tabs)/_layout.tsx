@@ -1,15 +1,39 @@
 import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Tabs } from "expo-router";
 
+import { COLORS } from "@/theme/colors";
+
 export default function RootLayout() {
   return (
-    <Tabs>
+    <Tabs
+      screenOptions={{
+        headerStyle: { backgroundColor: COLORS.panelDark },
+        headerTintColor: "rgba(255,255,255,0.9)",
+        headerTitleStyle: { fontWeight: "600" },
+        tabBarStyle: {
+          backgroundColor: COLORS.appMenu,
+          borderTopColor: "rgba(255,255,255,0.10)",
+        },
+        tabBarActiveTintColor: "#60A5FA",
+        tabBarInactiveTintColor: "rgba(255,255,255,0.55)",
+      }}
+    >
       <Tabs.Screen
         name="index"
         options={{
-          title: "Schedule",
+          title: "Home",
           tabBarIcon: ({ color }) => (
             <MaterialIcons size={28} name="home" color={color} />
+          ),
+          headerShown: false,
+        }}
+      />
+      <Tabs.Screen
+        name="schedule"
+        options={{
+          title: "Schedule",
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons size={28} name="calendar-today" color={color} />
           ),
           headerShown: false,
         }}
@@ -29,7 +53,7 @@ export default function RootLayout() {
         options={{
           title: "Saved",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons size={28} name="house" color={color} />
+            <MaterialIcons size={28} name="bookmark-outline" color={color} />
           ),
           headerShown: false,
         }}
@@ -39,7 +63,7 @@ export default function RootLayout() {
         options={{
           title: "About",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons size={28} name="info" color={color} />
+            <MaterialIcons size={28} name="info-outline" color={color} />
           ),
           headerShown: false,
         }}
