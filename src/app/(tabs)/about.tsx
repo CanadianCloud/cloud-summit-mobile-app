@@ -65,6 +65,14 @@ const creditMembers = [
     name: 'Cassandra Carlos',
     url: 'https://www.linkedin.com/in/cassandracarlos/',
   },
+   {
+    name: 'Syouhei Yoshitake',
+    url: 'https://www.linkedin.com/in/syouyoshi/',
+  },
+   {
+    name: 'Sotheng Chheang',
+    url: 'https://www.linkedin.com/in/sotheng-chheang/',
+  },
 ] as const;
 
 export default function About() {
