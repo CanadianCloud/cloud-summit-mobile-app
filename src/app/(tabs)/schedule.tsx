@@ -96,7 +96,7 @@ export default function Schedule() {
   }
 
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView edges={['left', 'right', 'bottom']} style={styles.root}>
       <View style={styles.header}>
         <AppText style={TYPOGRAPHY.screenHeader}>Schedule</AppText>
       </View>

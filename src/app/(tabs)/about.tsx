@@ -151,7 +151,7 @@ const creditMembers = [
 
 export default function About() {
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView edges={["left", "right", "bottom"]} style={styles.root}>
       <View style={styles.header}>
         <AppText style={TYPOGRAPHY.screenHeader}>About</AppText>
       </View>

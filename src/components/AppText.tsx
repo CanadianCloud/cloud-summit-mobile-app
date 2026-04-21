@@ -16,4 +16,3 @@ export default function AppText({ style, className, ...rest }: Props) {
     />
   );
 }
-
