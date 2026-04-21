@@ -2,6 +2,7 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { Image } from "expo-image";
 import { Link } from "expo-router";
 import { Pressable, StyleSheet, View } from "react-native";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import AppText from "@/components/AppText";
 import { COLORS } from "@/theme/colors";
@@ -9,7 +10,7 @@ import { TYPOGRAPHY } from "@/theme/typography";
 
 export default function Index() {
   return (
-    <View style={styles.root}>
+    <SafeAreaView edges={["top", "left", "right", "bottom"]} style={styles.root}>
       <View style={styles.content}>
         <Image
           source={require("../../../assets/images/CloudSummit.png")}
@@ -37,7 +38,7 @@ export default function Index() {
           </Link>
         </View>
       </View>
-    </View>
+    </SafeAreaView>
   );
 }
 
