@@ -6,7 +6,6 @@ import { useEffect } from "react";
 
 import { COLORS } from "@/theme/colors";
 
-// جلوگیری از مخفی شدن خودکار اسپلش اسکرین تا زمان لود کامل فونت‌ها
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -17,12 +16,10 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loaded || error) {
-      // به محض لود شدن فونت‌ها یا بروز خطا، اسپلش اسکرین را مخفی کن
       SplashScreen.hideAsync();
     }
   }, [loaded, error]);
 
-  // اگر فونت‌ها هنوز لود نشده‌اند و خطایی هم رخ نداده، چیزی رندر نکن
   if (!loaded && !error) {
     return null;
   }
@@ -89,16 +86,15 @@ export default function RootLayout() {
         }}
       />
       <Tabs.Screen
-        name="about" // نام فایل اسکرین شما
+        name="about"
         options={{
           title: "About",
           tabBarIcon: ({ color }) => (
             <MaterialIcons size={28} name="info-outline" color={color} />
           ),
-          headerShown: false, // این خط باعث حذف هدر خودکار بالای صفحه می‌شود
+          headerShown: false,
         }}
       />
-      {/* اسکرین‌های دیگر در صورت وجود به طور خودکار شناسایی می‌شوند */}
     </Tabs>
   );
 }

@@ -18,7 +18,6 @@ import AppText from "@/components/AppText";
 import { COLORS } from "@/theme/colors";
 import { TYPOGRAPHY } from "@/theme/typography";
 
-// --- داده‌های ثابت ---
 const committeeMembers = [
   { name: "Matt Carolan", url: "https://www.linkedin.com/in/matthewcarolan/" },
   { name: "Bibi Souza", url: "https://www.linkedin.com/in/bibschan/" },
@@ -68,7 +67,6 @@ const creditMembers = [
   },
 ] as const;
 
-// --- مؤلفه کارت عضو (مشابه LegendItem) ---
 const MemberItem = ({ name, url }: { name: string; url: string }) => {
   const hoverValue = useSharedValue(0);
 
@@ -113,13 +111,10 @@ const MemberItem = ({ name, url }: { name: string; url: string }) => {
   );
 };
 
-// --- صفحه اصلی ---
 export default function About() {
   return (
     <SafeAreaView style={styles.root}>
-      {/* توجه: هدر دستی حذف شد تا از هدر Layout استفاده شود. 
-         اگر headerShown: false را در لایوت ست نکرده‌ای، طبق پیام قبلی عمل کن.
-      */}
+      
       <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.card}>
           <AppText style={styles.cardBody}>
@@ -225,7 +220,6 @@ const styles = StyleSheet.create({
     color: COLORS.textPrimary,
   },
 
-  // --- استایل‌های Legend ---
   memberGrid: {
     flexDirection: "row",
     flexWrap: "wrap",
@@ -238,7 +232,7 @@ const styles = StyleSheet.create({
   memberItem: {
     flexDirection: "row",
     alignItems: "center",
-    height: 56, // دقیقا مشابه LegendItem در مپ
+    height: 56, 
     paddingHorizontal: 10,
     paddingVertical: 8,
     borderRadius: 5,
@@ -251,7 +245,7 @@ const styles = StyleSheet.create({
   memberName: {
     ...TYPOGRAPHY.bodyLarge,
     color: COLORS.textPrimary,
-    fontSize: 13, // کمی کوچک‌تر برای جا شدن اسامی طولانی در دو ستون
+    fontSize: 13, 
   },
   link: {
     ...TYPOGRAPHY.linkName,
