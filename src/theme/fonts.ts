@@ -1,11 +1,18 @@
-import { Platform } from 'react-native';
+// src/theme/fonts.ts
+import { Platform } from "react-native";
 
 export const FONTS = {
-  // No local font files are bundled right now, so we use the platform default.
-  // If you later add Inter ttf/otf files to `assets/`, you can update this single constant.
-  sans: Platform.select({
-    ios: 'System',
-    android: 'System',
-    default: 'System',
+  // معادل --font-display در سایت
+  display: Platform.select({
+    ios: "SquadaOne-Regular",
+    android: "SquadaOne-Regular",
+    default: "System",
+  }),
+
+  // معادل --font-body در سایت
+  body: Platform.select({
+    ios: "NotoSans-Medium",
+    android: "NotoSans-Medium",
+    default: "System",
   }),
 } as const;
