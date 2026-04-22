@@ -7,11 +7,11 @@ import {
   StyleSheet,
   View,
 } from "react-native";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 import AppText from "@/components/AppText";
 import { COLORS } from "@/theme/colors";
 import { TYPOGRAPHY } from "@/theme/typography";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 type ExternalLinkConfig = {
   key: string;
@@ -151,12 +151,12 @@ const creditMembers = [
 
 export default function About() {
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView edges={["top", "bottom"]} style={styles.root}>
       <View style={styles.header}>
         <AppText style={TYPOGRAPHY.screenHeader}>About</AppText>
       </View>
 
-      <ScrollView contentContainerStyle={styles.content}>
+      <ScrollView contentContainerStyle={[styles.content]}>
         <View style={styles.card}>
           <AppText style={styles.cardBody}>
             Cloud Summit is a community-driven event connecting people who are
@@ -274,7 +274,7 @@ export default function About() {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: COLORS.appBg },
+  root: { flex: 1, backgroundColor: COLORS.headerBlue },
   header: {
     backgroundColor: COLORS.headerBlue,
     paddingHorizontal: 16,

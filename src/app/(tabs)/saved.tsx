@@ -68,7 +68,7 @@ export default function Saved() {
   }
 
   return (
-    <SafeAreaView style={styles.root}>
+    <SafeAreaView edges={["top", "left", "right", "bottom"]} style={styles.root}>
       <View style={styles.header}>
         <AppText style={TYPOGRAPHY.screenHeader}>Saved</AppText>
       </View>

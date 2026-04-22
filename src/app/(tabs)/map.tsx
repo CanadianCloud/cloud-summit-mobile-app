@@ -492,7 +492,7 @@ export default function MapScreen() {
   };
 
   return (
-    <SafeAreaView style={styles.container}>
+    <SafeAreaView edges={['top', 'left', 'right', 'bottom']} style={styles.container}>
       <View style={styles.header}>
         <AppText style={TYPOGRAPHY.screenHeader}>Map</AppText>
       </View>
