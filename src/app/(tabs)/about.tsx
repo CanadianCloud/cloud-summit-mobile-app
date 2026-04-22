@@ -274,7 +274,7 @@ export default function About() {
 }
 
 const styles = StyleSheet.create({
-  root: { flex: 1, backgroundColor: COLORS.headerBlue },
+  root: { flex: 1, backgroundColor: COLORS.appBg },
   header: {
     backgroundColor: COLORS.headerBlue,
     paddingHorizontal: 16,
