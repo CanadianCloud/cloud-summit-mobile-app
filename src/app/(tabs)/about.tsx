@@ -1,4 +1,5 @@
 import React from "react";
+import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import {
   Linking,
   Platform,
@@ -17,6 +18,73 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AppText from "@/components/AppText";
 import { COLORS } from "@/theme/colors";
 import { TYPOGRAPHY } from "@/theme/typography";
+import { SafeAreaView } from "react-native-safe-area-context";
+
+type ExternalLinkConfig = {
+  key: string;
+  label: string;
+  /** Font Awesome 5 brand icon name. */
+  icon: "linkedin" | "discord" | "youtube" | "instagram";
+  webUrl: string;
+  /** Tried in order with Linking.canOpenURL before webUrl. */
+  nativeUrls: readonly string[];
+};
+
+/** FR-25: configurable external links (FR-26–28: native app when available, else browser). */
+const externalLinks = [
+  {
+    key: "linkedin",
+    label: "Canadian Cloud on LinkedIn",
+    icon: "linkedin",
+    webUrl: "https://www.linkedin.com/company/canadiancloud",
+    nativeUrls: ["linkedin://company/canadiancloud"],
+  },
+  {
+    key: "discord",
+    label: "Canadian Cloud on Discord",
+    icon: "discord",
+    webUrl: "https://discord.com/invite/wg372JtEK8",
+    nativeUrls: [
+      "discord://invite/wg372JtEK8",
+      "discord://discord.com/invite/wg372JtEK8",
+    ],
+  },
+  {
+    key: "youtube",
+    label: "Canadian Cloud on YouTube",
+    icon: "youtube",
+    webUrl: "https://www.youtube.com/channel/UCMfuz22CouuimIXngTMMZIQ",
+    nativeUrls: [
+      "youtube://www.youtube.com/channel/UCMfuz22CouuimIXngTMMZIQ",
+      "vnd.youtube://channel/UCMfuz22CouuimIXngTMMZIQ",
+    ],
+  },
+  {
+    key: "instagram",
+    label: "Canadian Cloud on Instagram",
+    icon: "instagram",
+    webUrl: "https://www.instagram.com/canadiancloudninja/",
+    nativeUrls: ["instagram://user?username=canadiancloudninja"],
+  },
+] as const satisfies readonly ExternalLinkConfig[];
+
+async function openExternalLink(link: ExternalLinkConfig) {
+  if (Platform.OS === "web") {
+    await Linking.openURL(link.webUrl);
+    return;
+  }
+  for (const url of link.nativeUrls) {
+    try {
+      if (await Linking.canOpenURL(url)) {
+        await Linking.openURL(url);
+        return;
+      }
+    } catch {
+      /* try next native URL or web */
+    }
+  }
+  await Linking.openURL(link.webUrl);
+}
 
 const committeeMembers = [
   { name: "Matt Carolan", url: "https://www.linkedin.com/in/matthewcarolan/" },
@@ -26,9 +94,43 @@ const committeeMembers = [
   {
     name: "Fabio Simka Coutinho",
     url: "https://www.linkedin.com/in/fabio-simka/",
+    name: "Matt Carolan",
+    url: "https://www.linkedin.com/in/matthewcarolan/",
   },
   { name: "Jhan (Shanky) Silva", url: "https://www.linkedin.com/in/shankyjs/" },
   { name: "Michael Carlos", url: "https://www.linkedin.com/in/mcarlos/" },
+  {
+    name: "Nichanun Pong (Luck)",
+    url: "https://www.linkedin.com/in/nichanun-pong/",
+  },
+  {
+    name: "Fernando Stoelting",
+    url: "https://www.linkedin.com/in/fstoelting/",
+  },
+  {
+    name: "Bibi Souza",
+    url: "https://www.linkedin.com/in/bibschan/",
+  },
+  {
+    name: "Andrey Barkov",
+    url: "https://www.linkedin.com/in/andreybarkov/",
+  },
+  {
+    name: "Warren Lyne",
+    url: "https://www.linkedin.com/in/warrenlyne/",
+  },
+  {
+    name: "Fabio Simka Coutinho",
+    url: "https://www.linkedin.com/in/fabio-simka/",
+  },
+  {
+    name: "Jhan (Shanky) Silva",
+    url: "https://www.linkedin.com/in/shankyjs/",
+  },
+  {
+    name: "Michael Carlos",
+    url: "https://www.linkedin.com/in/mcarlos/",
+  },
   {
     name: "Nichanun Pong (Luck)",
     url: "https://www.linkedin.com/in/nichanun-pong/",
@@ -61,6 +163,10 @@ const creditMembers = [
     url: "https://www.linkedin.com/in/cassandracarlos/",
   },
   { name: "Syouhei Yoshitake", url: "https://www.linkedin.com/in/syouyoshi/" },
+  {
+    name: "Syouhei Yoshitake",
+    url: "https://www.linkedin.com/in/syouyoshi/",
+  },
   {
     name: "Sotheng Chheang",
     url: "https://www.linkedin.com/in/sotheng-chheang/",
@@ -116,6 +222,12 @@ export default function About() {
     <SafeAreaView style={styles.root}>
       
       <ScrollView contentContainerStyle={styles.content}>
+    <SafeAreaView edges={["top", "bottom"]} style={styles.root}>
+      <View style={styles.header}>
+        <AppText style={TYPOGRAPHY.screenHeader}>About</AppText>
+      </View>
+
+      <ScrollView contentContainerStyle={[styles.content]}>
         <View style={styles.card}>
           <AppText style={styles.cardBody}>
             Cloud Summit is a community-driven event connecting people who are
@@ -165,6 +277,35 @@ export default function About() {
             {"\n\n"}
             Join us and be part of the future of tech.
           </AppText>
+
+          <ScrollView
+            horizontal
+            scrollEnabled={false}
+            showsHorizontalScrollIndicator={false}
+            accessibilityRole="list"
+            contentContainerStyle={styles.socialLinksRow}
+          >
+            {externalLinks.map((link) => (
+              <Pressable
+                key={link.key}
+                accessibilityRole="link"
+                accessibilityLabel={link.label}
+                onPress={() => void openExternalLink(link)}
+                style={({ pressed }) => [
+                  styles.socialLinkHit,
+                  pressed && styles.socialLinkHitPressed,
+                ]}
+              >
+                <FontAwesome5
+                  brand
+                  name={link.icon}
+                  size={32}
+                  color={COLORS.textMuted}
+                  style={{ marginRight: 16 }}
+                />
+              </Pressable>
+            ))}
+          </ScrollView>
         </View>
 
         {/* Committee Section */}
@@ -177,6 +318,12 @@ export default function About() {
                 name={member.name}
                 url={member.url}
               />
+                accessibilityRole="link"
+                onPress={() => Linking.openURL(member.url)}
+                style={styles.committeeItem}
+              >
+                <AppText style={styles.committeeName}>{member.name}</AppText>
+              </Pressable>
             ))}
           </View>
         </View>
@@ -191,6 +338,12 @@ export default function About() {
                 name={member.name}
                 url={member.url}
               />
+                accessibilityRole="link"
+                onPress={() => Linking.openURL(member.url)}
+                style={styles.committeeItem}
+              >
+                <AppText style={styles.committeeName}>{member.name}</AppText>
+              </Pressable>
             ))}
           </View>
         </View>
@@ -221,12 +374,20 @@ const styles = StyleSheet.create({
   },
 
   memberGrid: {
+  committeeGrid: {
+    marginTop: 12,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
   },
   memberItemWrapper: {
     width: "48.5%",
+  committeeItem: {
+    width: "48%",
+    borderRadius: 14,
+    backgroundColor: "#111827",
+    paddingHorizontal: 12,
+    paddingVertical: 10,
     marginBottom: 8,
   },
   memberItem: {
@@ -251,5 +412,20 @@ const styles = StyleSheet.create({
     ...TYPOGRAPHY.linkName,
     color: "#60A5FA",
     textDecorationLine: "underline",
+  },
+  socialLinksRow: {
+    marginTop: 16,
+    flexDirection: "row",
+    alignItems: "center",
+    gap: 8,
+    paddingRight: 4,
+  },
+  socialLinkHit: {
+    padding: 10,
+    borderRadius: 12,
+    backgroundColor: "rgba(255,255,255,0.06)",
+  },
+  socialLinkHitPressed: {
+    backgroundColor: "rgba(255,255,255,0.12)",
   },
 });
