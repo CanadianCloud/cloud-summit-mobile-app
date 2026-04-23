@@ -1,3 +1,4 @@
+import React from "react";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
 import {
   Linking,
@@ -7,6 +8,12 @@ import {
   StyleSheet,
   View,
 } from "react-native";
+import Animated, {
+  useAnimatedStyle,
+  useSharedValue,
+  withTiming,
+} from "react-native-reanimated";
+import { SafeAreaView } from "react-native-safe-area-context";
 
 import AppText from "@/components/AppText";
 import { COLORS } from "@/theme/colors";
@@ -80,9 +87,25 @@ async function openExternalLink(link: ExternalLinkConfig) {
 }
 
 const committeeMembers = [
+  { name: "Matt Carolan", url: "https://www.linkedin.com/in/matthewcarolan/" },
+  { name: "Bibi Souza", url: "https://www.linkedin.com/in/bibschan/" },
+  { name: "Andrey Barkov", url: "https://www.linkedin.com/in/andreybarkov/" },
+  { name: "Warren Lyne", url: "https://www.linkedin.com/in/warrenlyne/" },
   {
+    name: "Fabio Simka Coutinho",
+    url: "https://www.linkedin.com/in/fabio-simka/",
     name: "Matt Carolan",
     url: "https://www.linkedin.com/in/matthewcarolan/",
+  },
+  { name: "Jhan (Shanky) Silva", url: "https://www.linkedin.com/in/shankyjs/" },
+  { name: "Michael Carlos", url: "https://www.linkedin.com/in/mcarlos/" },
+  {
+    name: "Nichanun Pong (Luck)",
+    url: "https://www.linkedin.com/in/nichanun-pong/",
+  },
+  {
+    name: "Fernando Stoelting",
+    url: "https://www.linkedin.com/in/fstoelting/",
   },
   {
     name: "Bibi Souza",
@@ -139,6 +162,7 @@ const creditMembers = [
     name: "Cassandra Carlos",
     url: "https://www.linkedin.com/in/cassandracarlos/",
   },
+  { name: "Syouhei Yoshitake", url: "https://www.linkedin.com/in/syouyoshi/" },
   {
     name: "Syouhei Yoshitake",
     url: "https://www.linkedin.com/in/syouyoshi/",
@@ -149,8 +173,55 @@ const creditMembers = [
   },
 ] as const;
 
+const MemberItem = ({ name, url }: { name: string; url: string }) => {
+  const hoverValue = useSharedValue(0);
+
+  const animatedStyle = useAnimatedStyle(() => {
+    return {
+      backgroundColor: withTiming(
+        hoverValue.value === 1 ? "rgba(30, 144, 255, 0.05)" : COLORS.panelDark,
+        { duration: 200 },
+      ),
+      borderColor: withTiming(
+        hoverValue.value === 1 ? "#1e90ff" : "rgba(255,255,255,0.12)",
+        { duration: 200 },
+      ),
+      shadowOpacity: withTiming(hoverValue.value === 1 ? 0.3 : 0, {
+        duration: 200,
+      }),
+    };
+  });
+
+  return (
+    <Pressable
+      onPress={() => Linking.openURL(url)}
+      style={styles.memberItemWrapper}
+      {...(Platform.OS === "web"
+        ? {
+            onMouseEnter: () => (hoverValue.value = 1),
+            onMouseLeave: () => (hoverValue.value = 0),
+          }
+        : {
+            onPressIn: () => (hoverValue.value = 1),
+            onPressOut: () => (hoverValue.value = 0),
+          })}
+    >
+      <Animated.View style={[styles.memberItem, animatedStyle]}>
+        <View style={styles.textWrap}>
+          <AppText style={styles.memberName} numberOfLines={1}>
+            {name}
+          </AppText>
+        </View>
+      </Animated.View>
+    </Pressable>
+  );
+};
+
 export default function About() {
   return (
+    <SafeAreaView style={styles.root}>
+      
+      <ScrollView contentContainerStyle={styles.content}>
     <SafeAreaView edges={["top", "bottom"]} style={styles.root}>
       <View style={styles.header}>
         <AppText style={TYPOGRAPHY.screenHeader}>About</AppText>
@@ -237,12 +308,16 @@ export default function About() {
           </ScrollView>
         </View>
 
+        {/* Committee Section */}
         <View style={[styles.card, { marginTop: 12 }]}>
           <AppText style={styles.cardTitle}>Committee Members</AppText>
-          <View style={styles.committeeGrid}>
+          <View style={styles.memberGrid}>
             {committeeMembers.map((member) => (
-              <Pressable
+              <MemberItem
                 key={member.name}
+                name={member.name}
+                url={member.url}
+              />
                 accessibilityRole="link"
                 onPress={() => Linking.openURL(member.url)}
                 style={styles.committeeItem}
@@ -253,12 +328,16 @@ export default function About() {
           </View>
         </View>
 
+        {/* App Team Section */}
         <View style={[styles.card, { marginTop: 12 }]}>
           <AppText style={styles.cardTitle}>App Team</AppText>
-          <View style={styles.committeeGrid}>
+          <View style={styles.memberGrid}>
             {creditMembers.map((member) => (
-              <Pressable
+              <MemberItem
                 key={member.name}
+                name={member.name}
+                url={member.url}
+              />
                 accessibilityRole="link"
                 onPress={() => Linking.openURL(member.url)}
                 style={styles.committeeItem}
@@ -275,11 +354,6 @@ export default function About() {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: COLORS.appBg },
-  header: {
-    backgroundColor: COLORS.headerBlue,
-    paddingHorizontal: 16,
-    paddingVertical: 14,
-  },
   content: { paddingHorizontal: 12, paddingVertical: 12 },
   card: {
     borderRadius: 18,
@@ -289,17 +363,25 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 14,
   },
-  cardTitle: { ...TYPOGRAPHY.cardHeading },
+  cardTitle: {
+    ...TYPOGRAPHY.cardHeading,
+    marginBottom: 12,
+  },
   cardBody: {
     marginTop: 8,
     ...TYPOGRAPHY.bodyLarge,
+    color: COLORS.textPrimary,
   },
+
+  memberGrid: {
   committeeGrid: {
     marginTop: 12,
     flexDirection: "row",
     flexWrap: "wrap",
     justifyContent: "space-between",
   },
+  memberItemWrapper: {
+    width: "48.5%",
   committeeItem: {
     width: "48%",
     borderRadius: 14,
@@ -308,7 +390,24 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     marginBottom: 8,
   },
-  committeeName: { ...TYPOGRAPHY.linkName },
+  memberItem: {
+    flexDirection: "row",
+    alignItems: "center",
+    height: 56, 
+    paddingHorizontal: 10,
+    paddingVertical: 8,
+    borderRadius: 5,
+    borderWidth: 1,
+    shadowColor: "#1e90ff",
+    shadowOffset: { width: 0, height: 0 },
+    shadowRadius: 6,
+  },
+  textWrap: { flex: 1 },
+  memberName: {
+    ...TYPOGRAPHY.bodyLarge,
+    color: COLORS.textPrimary,
+    fontSize: 13, 
+  },
   link: {
     ...TYPOGRAPHY.linkName,
     color: "#60A5FA",
