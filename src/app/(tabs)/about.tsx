@@ -18,7 +18,6 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import AppText from "@/components/AppText";
 import { COLORS } from "@/theme/colors";
 import { TYPOGRAPHY } from "@/theme/typography";
-import { SafeAreaView } from "react-native-safe-area-context";
 
 type ExternalLinkConfig = {
   key: string;
@@ -94,8 +93,6 @@ const committeeMembers = [
   {
     name: "Fabio Simka Coutinho",
     url: "https://www.linkedin.com/in/fabio-simka/",
-    name: "Matt Carolan",
-    url: "https://www.linkedin.com/in/matthewcarolan/",
   },
   { name: "Jhan (Shanky) Silva", url: "https://www.linkedin.com/in/shankyjs/" },
   { name: "Michael Carlos", url: "https://www.linkedin.com/in/mcarlos/" },
@@ -164,10 +161,6 @@ const creditMembers = [
   },
   { name: "Syouhei Yoshitake", url: "https://www.linkedin.com/in/syouyoshi/" },
   {
-    name: "Syouhei Yoshitake",
-    url: "https://www.linkedin.com/in/syouyoshi/",
-  },
-  {
     name: "Sotheng Chheang",
     url: "https://www.linkedin.com/in/sotheng-chheang/",
   },
@@ -194,6 +187,7 @@ const MemberItem = ({ name, url }: { name: string; url: string }) => {
 
   return (
     <Pressable
+      accessibilityRole="link"
       onPress={() => Linking.openURL(url)}
       style={styles.memberItemWrapper}
       {...(Platform.OS === "web"
@@ -219,15 +213,15 @@ const MemberItem = ({ name, url }: { name: string; url: string }) => {
 
 export default function About() {
   return (
-    <SafeAreaView style={styles.root}>
-      
-      <ScrollView contentContainerStyle={styles.content}>
-    <SafeAreaView edges={["top", "bottom"]} style={styles.root}>
+    <SafeAreaView
+      edges={["top", "left", "right", "bottom"]}
+      style={styles.root}
+    >
       <View style={styles.header}>
         <AppText style={TYPOGRAPHY.screenHeader}>About</AppText>
       </View>
 
-      <ScrollView contentContainerStyle={[styles.content]}>
+      <ScrollView contentContainerStyle={styles.content}>
         <View style={styles.card}>
           <AppText style={styles.cardBody}>
             Cloud Summit is a community-driven event connecting people who are
@@ -312,18 +306,12 @@ export default function About() {
         <View style={[styles.card, { marginTop: 12 }]}>
           <AppText style={styles.cardTitle}>Committee Members</AppText>
           <View style={styles.memberGrid}>
-            {committeeMembers.map((member) => (
+            {committeeMembers.map((member, index) => (
               <MemberItem
-                key={member.name}
+                key={`${member.url}-${index}`}
                 name={member.name}
                 url={member.url}
               />
-                accessibilityRole="link"
-                onPress={() => Linking.openURL(member.url)}
-                style={styles.committeeItem}
-              >
-                <AppText style={styles.committeeName}>{member.name}</AppText>
-              </Pressable>
             ))}
           </View>
         </View>
@@ -332,18 +320,12 @@ export default function About() {
         <View style={[styles.card, { marginTop: 12 }]}>
           <AppText style={styles.cardTitle}>App Team</AppText>
           <View style={styles.memberGrid}>
-            {creditMembers.map((member) => (
+            {creditMembers.map((member, index) => (
               <MemberItem
-                key={member.name}
+                key={`${member.url}-${index}`}
                 name={member.name}
                 url={member.url}
               />
-                accessibilityRole="link"
-                onPress={() => Linking.openURL(member.url)}
-                style={styles.committeeItem}
-              >
-                <AppText style={styles.committeeName}>{member.name}</AppText>
-              </Pressable>
             ))}
           </View>
         </View>
@@ -354,6 +336,11 @@ export default function About() {
 
 const styles = StyleSheet.create({
   root: { flex: 1, backgroundColor: COLORS.appBg },
+  header: {
+    backgroundColor: COLORS.headerBlue,
+    paddingHorizontal: 16,
+    paddingVertical: 14,
+  },
   content: { paddingHorizontal: 12, paddingVertical: 12 },
   card: {
     borderRadius: 18,
@@ -374,7 +361,6 @@ const styles = StyleSheet.create({
   },
 
   memberGrid: {
-  committeeGrid: {
     marginTop: 12,
     flexDirection: "row",
     flexWrap: "wrap",
@@ -382,13 +368,6 @@ const styles = StyleSheet.create({
   },
   memberItemWrapper: {
     width: "48.5%",
-  committeeItem: {
-    width: "48%",
-    borderRadius: 14,
-    backgroundColor: "#111827",
-    paddingHorizontal: 12,
-    paddingVertical: 10,
-    marginBottom: 8,
   },
   memberItem: {
     flexDirection: "row",
