@@ -86,26 +86,74 @@ async function openExternalLink(link: ExternalLinkConfig) {
   await Linking.openURL(link.webUrl);
 }
 
+const logosPath = require("../../../assets/images/logos/");
 const sponsorsLogos = [
   {
     name: "Fortinet",
-    logo: require("../../../assets/images/logos/Fortinet-logo.png"),
+    logo: require(`${logosPath}/Fortinet-logo.png`),
   },
   {
     name: "AWS",
-    logo: require("../../../assets/images/logos/AWS-logo.png"),
+    logo: require(`${logosPath}/AWS-logo.png`),
   },
   {
     name: "Habile Labs",
-    logo: require("../../../assets/images/logos/HabileLabs-logo.png"),
+    logo: require(`${logosPath}/HabileLabs-logo.png`),
   },
   {
     name: "Elastic",
-    logo: require("../../../assets/images/logos/Elastic-logo.png"),
+    logo: require(`${logosPath}/Elastic-logo.png`),
   },
   {
     name: "Defang",
-    logo: require("../../../assets/images/logos/Defang-logo.png"),
+    logo: require(`${logosPath}/Defang-logo.png`),
+  },
+];
+
+const communityPartnersLogos = [
+  {
+    name: "AWS Day",
+    logo: require(`${logosPath}/AWS-Day-logo.png`),
+  },
+  {
+    name: "Wicys",
+    logo: require(`${logosPath}/Wicys-logo.png`),
+  },
+  {
+    name: "OpenBao",
+    logo: require(`${logosPath}/OpenBao-logo.png`),
+  },
+  {
+    name: "GDG",
+    logo: require(`${logosPath}/GDG-logo.png`),
+  },
+  {
+    name: "HackerRivals",
+    logo: require(`${logosPath}/HackerRivals-logo.png`),
+  },
+  {
+    name: "VanLug",
+    logo: require(`${logosPath}/VanLug-logo.png`),
+  },
+  {
+    name: "ISACA",
+    logo: require(`${logosPath}/ISACA-logo.png`),
+  },
+  {
+    name: "Microsoft",
+    logo: require(`${logosPath}/Microsoft-logo.png`),
+  },
+  {
+    name: "Asis",
+    logo: require(`${logosPath}/Asis-trans-logo.png`),
+  },
+  {
+    name: "Northeastern",
+    logo: require(`${logosPath}/Northeastern-logo.png`),
+  },
+  {
+    name: "Vanruby",
+    logo: require(`${logosPath}/Vanruby-logo.png`),
   },
 ];
 
@@ -326,6 +374,7 @@ export default function About() {
           </ScrollView>
         </View>
 
+        {/* Sponsors Section */}
         <View style={[styles.card, { marginTop: 8 }]}>
           <AppText style={styles.cardTitle}>Sponsors</AppText>
           <View style={styles.sponsorLogos}>
@@ -367,6 +416,42 @@ export default function About() {
                 resizeMode="contain"
               />
             </View>
+          </View>
+        </View>
+
+        {/* Community Partners Section */}
+        <View style={[styles.card, { marginTop: 12 }]}>
+          <AppText style={styles.cardTitle}>Community Partners</AppText>
+          <View style={styles.partnerGrid}>
+            {Array.from(
+              { length: Math.ceil(communityPartnersLogos.length / 4) },
+              (_, rowIndex) =>
+                communityPartnersLogos.slice(rowIndex * 4, rowIndex * 4 + 4),
+            ).map((row, rowIndex, allRows) => {
+              const isLastRow = rowIndex === allRows.length - 1;
+              const shouldStretch = isLastRow && row.length < 4;
+
+              return (
+                <View key={`partner-row-${rowIndex}`} style={styles.partnerRow}>
+                  {row.map((partner) => (
+                    <View
+                      key={partner.name}
+                      style={[
+                        styles.boxedItem,
+                        shouldStretch && styles.boxedItemStretch,
+                      ]}
+                    >
+                      <Image
+                        accessibilityLabel={partner.name}
+                        source={partner.logo}
+                        style={styles.sponsorLogoFull}
+                        resizeMode="contain"
+                      />
+                    </View>
+                  ))}
+                </View>
+              );
+            })}
           </View>
         </View>
 
@@ -478,6 +563,28 @@ const styles = StyleSheet.create({
   sponsorLogos: {
     marginTop: 4,
     gap: 8,
+  },
+  partnerGrid: {
+    marginTop: 8,
+    gap: 10,
+  },
+  partnerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 4,
+    marginBottom: 4,
+    gap: 8,
+  },
+  boxedItem: {
+    width: "23.5%",
+    minHeight: 64,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  boxedItemStretch: {
+    flex: 1,
+    width: undefined,
+    minHeight: 64,
   },
   sponsorRow: {
     alignItems: "center",
