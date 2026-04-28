@@ -1,6 +1,7 @@
-import React from "react";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import React from "react";
 import {
+  Image,
   Linking,
   Platform,
   Pressable,
@@ -84,6 +85,29 @@ async function openExternalLink(link: ExternalLinkConfig) {
   }
   await Linking.openURL(link.webUrl);
 }
+
+const sponsorsLogos = [
+  {
+    name: "Fortinet",
+    logo: require("../../../assets/images/logos/Fortinet-logo.png"),
+  },
+  {
+    name: "AWS",
+    logo: require("../../../assets/images/logos/AWS-logo.png"),
+  },
+  {
+    name: "Habile Labs",
+    logo: require("../../../assets/images/logos/HabileLabs-logo.png"),
+  },
+  {
+    name: "Elastic",
+    logo: require("../../../assets/images/logos/Elastic-logo.png"),
+  },
+  {
+    name: "Defang",
+    logo: require("../../../assets/images/logos/Defang-logo.png"),
+  },
+];
 
 const committeeMembers = [
   { name: "Matt Carolan", url: "https://www.linkedin.com/in/matthewcarolan/" },
@@ -302,6 +326,50 @@ export default function About() {
           </ScrollView>
         </View>
 
+        <View style={[styles.card, { marginTop: 8 }]}>
+          <AppText style={styles.cardTitle}>Sponsors</AppText>
+          <View style={styles.sponsorLogos}>
+            <View style={styles.sponsorRow}>
+              <Image
+                accessibilityLabel="Fortinet"
+                source={sponsorsLogos[0].logo}
+                style={styles.sponsorLogoFull}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={styles.sponsorRow}>
+              <Image
+                accessibilityLabel="AWS"
+                source={sponsorsLogos[1].logo}
+                style={styles.sponsorLogoFull}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={styles.sponsorRowTwo}>
+              <Image
+                accessibilityLabel="Habile Labs"
+                source={sponsorsLogos[2].logo}
+                style={styles.sponsorLogoHalf}
+                resizeMode="contain"
+              />
+              <Image
+                accessibilityLabel="Elastic"
+                source={sponsorsLogos[3].logo}
+                style={styles.sponsorLogoHalf}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={styles.sponsorRow}>
+              <Image
+                accessibilityLabel="Defang"
+                source={sponsorsLogos[4].logo}
+                style={styles.sponsorLogoFull}
+                resizeMode="contain"
+              />
+            </View>
+          </View>
+        </View>
+
         {/* Committee Section */}
         <View style={[styles.card, { marginTop: 12 }]}>
           <AppText style={styles.cardTitle}>Committee Members</AppText>
@@ -372,7 +440,7 @@ const styles = StyleSheet.create({
   memberItem: {
     flexDirection: "row",
     alignItems: "center",
-    height: 56, 
+    height: 56,
     paddingHorizontal: 10,
     paddingVertical: 8,
     borderRadius: 5,
@@ -385,7 +453,7 @@ const styles = StyleSheet.create({
   memberName: {
     ...TYPOGRAPHY.bodyLarge,
     color: COLORS.textPrimary,
-    fontSize: 13, 
+    fontSize: 13,
   },
   link: {
     ...TYPOGRAPHY.linkName,
@@ -406,5 +474,31 @@ const styles = StyleSheet.create({
   },
   socialLinkHitPressed: {
     backgroundColor: "rgba(255,255,255,0.12)",
+  },
+  sponsorLogos: {
+    marginTop: 4,
+    gap: 8,
+  },
+  sponsorRow: {
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: 64,
+  },
+  sponsorRowTwo: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 8,
+    minHeight: 64,
+  },
+  sponsorLogoFull: {
+    width: "100%",
+    maxWidth: 320,
+    height: 64,
+  },
+  sponsorLogoHalf: {
+    flex: 1,
+    height: 48,
+    maxWidth: "70%",
   },
 });
