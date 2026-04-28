@@ -86,74 +86,73 @@ async function openExternalLink(link: ExternalLinkConfig) {
   await Linking.openURL(link.webUrl);
 }
 
-const logosPath = require("../../../assets/images/logos/");
 const sponsorsLogos = [
   {
     name: "Fortinet",
-    logo: require(`${logosPath}/Fortinet-logo.png`),
+    logo: require("../../../assets/images/logos/Fortinet-logo.png"),
   },
   {
     name: "AWS",
-    logo: require(`${logosPath}/AWS-logo.png`),
+    logo: require("../../../assets/images/logos/AWS-logo.png"),
   },
   {
     name: "Habile Labs",
-    logo: require(`${logosPath}/HabileLabs-logo.png`),
+    logo: require("../../../assets/images/logos/HabileLabs-logo.png"),
   },
   {
     name: "Elastic",
-    logo: require(`${logosPath}/Elastic-logo.png`),
+    logo: require("../../../assets/images/logos/Elastic-logo.png"),
   },
   {
     name: "Defang",
-    logo: require(`${logosPath}/Defang-logo.png`),
+    logo: require("../../../assets/images/logos/Defang-logo.png"),
   },
 ];
 
 const communityPartnersLogos = [
   {
     name: "AWS Day",
-    logo: require(`${logosPath}/AWS-Day-logo.png`),
+    logo: require("../../../assets/images/logos/AWS-Day-logo.png"),
   },
   {
     name: "Wicys",
-    logo: require(`${logosPath}/Wicys-logo.png`),
+    logo: require("../../../assets/images/logos/Wicys-logo.png"),
   },
   {
     name: "OpenBao",
-    logo: require(`${logosPath}/OpenBao-logo.png`),
+    logo: require("../../../assets/images/logos/OpenBao-logo.png"),
   },
   {
     name: "GDG",
-    logo: require(`${logosPath}/GDG-logo.png`),
+    logo: require("../../../assets/images/logos/GDG-logo.png"),
   },
   {
     name: "HackerRivals",
-    logo: require(`${logosPath}/HackerRivals-logo.png`),
+    logo: require("../../../assets/images/logos/HackerRivals-logo.png"),
   },
   {
     name: "VanLug",
-    logo: require(`${logosPath}/VanLug-logo.png`),
+    logo: require("../../../assets/images/logos/VanLug-logo.png"),
   },
   {
     name: "ISACA",
-    logo: require(`${logosPath}/ISACA-logo.png`),
+    logo: require("../../../assets/images/logos/ISACA-logo.png"),
   },
   {
     name: "Microsoft",
-    logo: require(`${logosPath}/Microsoft-logo.png`),
+    logo: require("../../../assets/images/logos/Microsoft-logo.png"),
   },
   {
     name: "Asis",
-    logo: require(`${logosPath}/Asis-trans-logo.png`),
+    logo: require("../../../assets/images/logos/Asis-trans-logo.png"),
   },
   {
     name: "Northeastern",
-    logo: require(`${logosPath}/Northeastern-logo.png`),
+    logo: require("../../../assets/images/logos/Northeastern-logo.png"),
   },
   {
     name: "Vanruby",
-    logo: require(`${logosPath}/Vanruby-logo.png`),
+    logo: require("../../../assets/images/logos/Vanruby-logo.png"),
   },
 ];
 
