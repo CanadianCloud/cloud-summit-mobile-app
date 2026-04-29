@@ -2,7 +2,6 @@ import MaterialIcons from "@expo/vector-icons/MaterialIcons";
 import { useFonts } from "expo-font";
 import { Tabs } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
-import { useEffect } from "react";
 import { StyleSheet, View } from "react-native";
 import {
   SafeAreaProvider,
@@ -10,7 +9,9 @@ import {
 } from "react-native-safe-area-context";
 
 import { COLORS } from "@/theme/colors";
+import { useEffect } from "react";
 
+// Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -21,17 +22,37 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loaded || error) {
-      SplashScreen.hideAsync();
+      // Small delay ensures the UI has actually painted before removing splash
+      const timer = setTimeout(async () => {
+        await SplashScreen.hideAsync();
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [loaded, error]);
 
+  // IMPORTANT: Keep returning null while loading to prevent
+  // the navigation from trying to render without fonts.
   if (!loaded && !error) {
     return null;
   }
 
+  // This function is triggered once the Root View is ready
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (loaded || error) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [loaded, error]);
+
+  // if (!loaded && !error) {
+  //   return null;
+  // }
+
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <View style={styles.root}>
+      <View
+        style={styles.root}
+        //  onLayout={onLayoutRootView}
+      >
         <Tabs
           screenOptions={{
             sceneStyle: { backgroundColor: COLORS.appBg },
@@ -116,6 +137,6 @@ export default function RootLayout() {
 const styles = StyleSheet.create({
   root: {
     flex: 1,
-    backgroundColor: COLORS.headerBlue,
+    backgroundColor: "#000000",
   },
 });

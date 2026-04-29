@@ -1,6 +1,7 @@
-import React from "react";
 import FontAwesome5 from "@expo/vector-icons/FontAwesome5";
+import React from "react";
 import {
+  Image,
   Linking,
   Platform,
   Pressable,
@@ -84,6 +85,76 @@ async function openExternalLink(link: ExternalLinkConfig) {
   }
   await Linking.openURL(link.webUrl);
 }
+
+const sponsorsLogos = [
+  {
+    name: "Fortinet",
+    logo: require("../../../assets/images/logos/Fortinet-logo.png"),
+  },
+  {
+    name: "AWS",
+    logo: require("../../../assets/images/logos/AWS-logo.png"),
+  },
+  {
+    name: "Habile Labs",
+    logo: require("../../../assets/images/logos/HabileLabs-logo.png"),
+  },
+  {
+    name: "Elastic",
+    logo: require("../../../assets/images/logos/Elastic-logo.png"),
+  },
+  {
+    name: "Defang",
+    logo: require("../../../assets/images/logos/Defang-logo.png"),
+  },
+];
+
+const communityPartnersLogos = [
+  {
+    name: "AWS Day",
+    logo: require("../../../assets/images/logos/AWS-Day-logo.png"),
+  },
+  {
+    name: "Wicys",
+    logo: require("../../../assets/images/logos/Wicys-logo.png"),
+  },
+  {
+    name: "OpenBao",
+    logo: require("../../../assets/images/logos/OpenBao-logo.png"),
+  },
+  {
+    name: "GDG",
+    logo: require("../../../assets/images/logos/GDG-logo.png"),
+  },
+  {
+    name: "HackerRivals",
+    logo: require("../../../assets/images/logos/HackerRivals-logo.png"),
+  },
+  {
+    name: "VanLug",
+    logo: require("../../../assets/images/logos/VanLug-logo.png"),
+  },
+  {
+    name: "ISACA",
+    logo: require("../../../assets/images/logos/ISACA-logo.png"),
+  },
+  {
+    name: "Microsoft",
+    logo: require("../../../assets/images/logos/Microsoft-logo.png"),
+  },
+  {
+    name: "Asis",
+    logo: require("../../../assets/images/logos/Asis-trans-logo.png"),
+  },
+  {
+    name: "Northeastern",
+    logo: require("../../../assets/images/logos/Northeastern-logo.png"),
+  },
+  {
+    name: "Vanruby",
+    logo: require("../../../assets/images/logos/Vanruby-logo.png"),
+  },
+];
 
 const committeeMembers = [
   { name: "Matt Carolan", url: "https://www.linkedin.com/in/matthewcarolan/" },
@@ -302,6 +373,87 @@ export default function About() {
           </ScrollView>
         </View>
 
+        {/* Sponsors Section */}
+        <View style={[styles.card, { marginTop: 8 }]}>
+          <AppText style={styles.cardTitle}>Sponsors</AppText>
+          <View style={styles.sponsorLogos}>
+            <View style={styles.sponsorRow}>
+              <Image
+                accessibilityLabel="Fortinet"
+                source={sponsorsLogos[0].logo}
+                style={styles.sponsorLogoFull}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={styles.sponsorRow}>
+              <Image
+                accessibilityLabel="AWS"
+                source={sponsorsLogos[1].logo}
+                style={styles.sponsorLogoFull}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={styles.sponsorRowTwo}>
+              <Image
+                accessibilityLabel="Habile Labs"
+                source={sponsorsLogos[2].logo}
+                style={styles.sponsorLogoHalf}
+                resizeMode="contain"
+              />
+              <Image
+                accessibilityLabel="Elastic"
+                source={sponsorsLogos[3].logo}
+                style={styles.sponsorLogoHalf}
+                resizeMode="contain"
+              />
+            </View>
+            <View style={styles.sponsorRow}>
+              <Image
+                accessibilityLabel="Defang"
+                source={sponsorsLogos[4].logo}
+                style={styles.sponsorLogoFull}
+                resizeMode="contain"
+              />
+            </View>
+          </View>
+        </View>
+
+        {/* Community Partners Section */}
+        <View style={[styles.card, { marginTop: 12 }]}>
+          <AppText style={styles.cardTitle}>Community Partners</AppText>
+          <View style={styles.partnerGrid}>
+            {Array.from(
+              { length: Math.ceil(communityPartnersLogos.length / 4) },
+              (_, rowIndex) =>
+                communityPartnersLogos.slice(rowIndex * 4, rowIndex * 4 + 4),
+            ).map((row, rowIndex, allRows) => {
+              const isLastRow = rowIndex === allRows.length - 1;
+              const shouldStretch = isLastRow && row.length < 4;
+
+              return (
+                <View key={`partner-row-${rowIndex}`} style={styles.partnerRow}>
+                  {row.map((partner) => (
+                    <View
+                      key={partner.name}
+                      style={[
+                        styles.boxedItem,
+                        shouldStretch && styles.boxedItemStretch,
+                      ]}
+                    >
+                      <Image
+                        accessibilityLabel={partner.name}
+                        source={partner.logo}
+                        style={styles.sponsorLogoFull}
+                        resizeMode="contain"
+                      />
+                    </View>
+                  ))}
+                </View>
+              );
+            })}
+          </View>
+        </View>
+
         {/* Committee Section */}
         <View style={[styles.card, { marginTop: 12 }]}>
           <AppText style={styles.cardTitle}>Committee Members</AppText>
@@ -372,7 +524,7 @@ const styles = StyleSheet.create({
   memberItem: {
     flexDirection: "row",
     alignItems: "center",
-    height: 56, 
+    height: 56,
     paddingHorizontal: 10,
     paddingVertical: 8,
     borderRadius: 5,
@@ -385,7 +537,7 @@ const styles = StyleSheet.create({
   memberName: {
     ...TYPOGRAPHY.bodyLarge,
     color: COLORS.textPrimary,
-    fontSize: 13, 
+    fontSize: 13,
   },
   link: {
     ...TYPOGRAPHY.linkName,
@@ -406,5 +558,53 @@ const styles = StyleSheet.create({
   },
   socialLinkHitPressed: {
     backgroundColor: "rgba(255,255,255,0.12)",
+  },
+  sponsorLogos: {
+    marginTop: 4,
+    gap: 8,
+  },
+  partnerGrid: {
+    marginTop: 8,
+    gap: 10,
+  },
+  partnerRow: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 4,
+    marginBottom: 4,
+    gap: 8,
+  },
+  boxedItem: {
+    width: "23.5%",
+    minHeight: 64,
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  boxedItemStretch: {
+    flex: 1,
+    width: undefined,
+    minHeight: 64,
+  },
+  sponsorRow: {
+    alignItems: "center",
+    justifyContent: "center",
+    minHeight: 64,
+  },
+  sponsorRowTwo: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "space-between",
+    gap: 8,
+    minHeight: 64,
+  },
+  sponsorLogoFull: {
+    width: "100%",
+    maxWidth: 320,
+    height: 64,
+  },
+  sponsorLogoHalf: {
+    flex: 1,
+    height: 48,
+    maxWidth: "70%",
   },
 });
