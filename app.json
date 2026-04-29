@@ -1,51 +1,65 @@
 {
   "expo": {
-    "name": "cloud-summit-mobile-app",
-    "slug": "cloud-summit-mobile-app",
+    "name": "Cloud Summit",
+    "slug": "cloud-summit",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/images/CloudSummit.png",
+    "icon": "./assets/images/logos/Cloud-Summit-DarkBg.png",
     "scheme": "cloudsummitmobileapp",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
+      "splash": {
+        "image": "./assets/images/logos/Cloud-Summit-DarkBg.png",
+        "resizeMode": "contain",
+        "backgroundColor": "#000000"
+      },
       "supportsTablet": true,
       "infoPlist": {
         "LSApplicationQueriesSchemes": [
           "linkedin",
           "discord",
           "youtube",
+          "instagram",
+          "linkedin",
+          "discord",
+          "youtube",
           "instagram"
         ]
-      }
+      },
+      "bundleIdentifier": "com.canada.cloud-summit"
     },
     "android": {
       "adaptiveIcon": {
-        "backgroundColor": "#E6F4FE",
-        "foregroundImage": "./assets/images/CloudSummit.png"
+        "backgroundColor": "#000000",
+        "foregroundImage": "./assets/images/logos/Cloud-Summit-DarkBg.png"
       },
       "edgeToEdgeEnabled": true,
-      "predictiveBackGestureEnabled": false
+      "predictiveBackGestureEnabled": false,
+      "package": "com.canada.cloudsummit"
     },
     "web": {
       "output": "static",
       "favicon": "./assets/images/CloudSummit.png"
+    },
+    "splash": {
+      "image": "./assets/images/logos/Cloud-Summit-DarkBg.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#000000"
     },
     "plugins": [
       "expo-router",
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/CloudSummit.png",
-          "imageWidth": 200,
+          "image": "./assets/images/logos/Cloud-Summit-DarkBg.png",
           "resizeMode": "contain",
           "backgroundColor": "#000000",
-          "dark": {
-            "backgroundColor": "#000000"
-          }
+          "imageWidth": 250
         }
       ],
-      "expo-font"
+      "expo-font",
+      "expo-web-browser"
     ],
     "experiments": {
       "typedRoutes": true,
