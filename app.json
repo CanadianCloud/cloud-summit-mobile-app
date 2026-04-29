@@ -52,10 +52,18 @@
       [
         "expo-splash-screen",
         {
-          "image": "./assets/images/logos/Cloud-Summit-DarkBg.png",
-          "resizeMode": "contain",
           "backgroundColor": "#000000",
-          "imageWidth": 250
+          "image": "./assets/images/logos/Cloud-Summit-DarkBg.png",
+          "dark": {
+            "backgroundColor": "#000000",
+            "image": "./assets/images/logos/Cloud-Summit-DarkBg.png"
+          },
+          "light": {
+            "backgroundColor": "#FFFFFF",
+            "image": "./assets/images/logos/Cloud-Summit-LightBg.png"
+          },
+          "resizeMode": "contain",
+          "imageWidth": 200
         }
       ],
       "expo-font",

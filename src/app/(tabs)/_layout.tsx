@@ -9,8 +9,9 @@ import {
 } from "react-native-safe-area-context";
 
 import { COLORS } from "@/theme/colors";
-import { useCallback } from "react";
+import { useEffect } from "react";
 
+// Keep the splash screen visible while we fetch resources
 SplashScreen.preventAutoHideAsync();
 
 export default function RootLayout() {
@@ -19,36 +20,39 @@ export default function RootLayout() {
     "NotoSans-Medium": require("../../../assets/fonts/NotoSans-Medium.ttf"),
   });
 
-  // useEffect(() => {
-  //   if (loaded || error) {
-  //     // Small delay ensures the UI has actually painted before removing splash
-  //     const timer = setTimeout(async () => {
-  //       await SplashScreen.hideAsync();
-  //     }, 100);
-  //     return () => clearTimeout(timer);
-  //   }
-  // }, [loaded, error]);
-
-  // // IMPORTANT: Keep returning null while loading to prevent
-  // // the navigation from trying to render without fonts.
-  // if (!loaded && !error) {
-  //   return null;
-  // }
-
-  // This function is triggered once the Root View is ready
-  const onLayoutRootView = useCallback(async () => {
+  useEffect(() => {
     if (loaded || error) {
-      await SplashScreen.hideAsync();
+      // Small delay ensures the UI has actually painted before removing splash
+      const timer = setTimeout(async () => {
+        await SplashScreen.hideAsync();
+      }, 100);
+      return () => clearTimeout(timer);
     }
   }, [loaded, error]);
 
+  // IMPORTANT: Keep returning null while loading to prevent
+  // the navigation from trying to render without fonts.
   if (!loaded && !error) {
     return null;
   }
 
+  // This function is triggered once the Root View is ready
+  // const onLayoutRootView = useCallback(async () => {
+  //   if (loaded || error) {
+  //     await SplashScreen.hideAsync();
+  //   }
+  // }, [loaded, error]);
+
+  // if (!loaded && !error) {
+  //   return null;
+  // }
+
   return (
     <SafeAreaProvider initialMetrics={initialWindowMetrics}>
-      <View style={styles.root} onLayout={onLayoutRootView}>
+      <View
+        style={styles.root}
+        //  onLayout={onLayoutRootView}
+      >
         <Tabs
           screenOptions={{
             sceneStyle: { backgroundColor: COLORS.appBg },
